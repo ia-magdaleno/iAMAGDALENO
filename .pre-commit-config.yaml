@@ -1,0 +1,7 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-secrets
+        name: Check Secrets
+        entry: bash -c 'git diff --cached --name-only | xargs -r grep -nE "(sk-[A-Za-z0-9]{32,}|eyJ[A-Za-z0-9_-]{10,}|AIza[0-9A-Za-z_-]{35})" && exit 1 || exit 0'
+        language: system

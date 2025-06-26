@@ -1,0 +1,34 @@
+# Entornos y secretos
+.env
+.env.*
+secrets/
+!secrets/openai_key.txt.example
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+backups/
+db_data/
+*.db
+*.sqlite3
+
+# Sistema y editores
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.log
+
+# Otros
+*.bak
+*.tmp
+*.old

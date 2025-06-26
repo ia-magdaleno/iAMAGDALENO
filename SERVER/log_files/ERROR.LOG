@@ -1,0 +1,109 @@
+= Xb2.NET LOG ==========
+Date: 20110506 13:38:12
+C:\server\WMRSOFT.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+HTTPS server started on host: MASTER, Port: 443
+Using OpenSSL version: {"OpenSSL 0.9.8k 25 Mar 2009", "not available", "compiler: cl  /MD /Ox /O2 /Ob2 /W3 /WX /Gs0 /GF /Gy /nologo -DOPENSSL_SYSNAME_WIN32 -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -DDSO_WIN32 -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE -DOPENSSL_CPUID_OBJ -DOPENSSL_IA32_SSE2 -DAES_ASM -DBN_ASM -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_BN_ASM_MONT -DMD5_ASM -DSHA1_ASM -DRMD160_ASM -DOPENSSL_USE_APPLINK -I. /Fdout32dll -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_SEED -DOPENSSL_NO_RC5 -DOPENSSL_NO_MDC2 -DOPENSSL_NO_CMS -DOPENSSL_NO_JPAKE -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_KRB5 -DOPENSSL_NO_DYNAMIC_ENGINE    ", "built on: Thu Jul 23 09:28:38 2009", "platform: VC-WIN32", "OPENSSLDIR: "c:/openssl/ssl""}
+Using ZLib version: 1.2.3
+
+Called from HTTPSSERVER(437)
+Called from STARTSERVICE(242)
+Called from MAIN(163)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:38:17
+C:\server\WMRSOFT.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Terminating HTTP server...
+
+Called from TERMINATE(173)
+Called from STARTSERVICE(294)
+Called from MAIN(163)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:38:57
+C:\server\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+HTTPS server started on host: MASTER, Port: 443
+Using OpenSSL version: {"OpenSSL 0.9.8k 25 Mar 2009", "not available", "compiler: cl  /MD /Ox /O2 /Ob2 /W3 /WX /Gs0 /GF /Gy /nologo -DOPENSSL_SYSNAME_WIN32 -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -DDSO_WIN32 -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE -DOPENSSL_CPUID_OBJ -DOPENSSL_IA32_SSE2 -DAES_ASM -DBN_ASM -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_BN_ASM_MONT -DMD5_ASM -DSHA1_ASM -DRMD160_ASM -DOPENSSL_USE_APPLINK -I. /Fdout32dll -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_SEED -DOPENSSL_NO_RC5 -DOPENSSL_NO_MDC2 -DOPENSSL_NO_CMS -DOPENSSL_NO_JPAKE -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_KRB5 -DOPENSSL_NO_DYNAMIC_ENGINE    ", "built on: Thu Jul 23 09:28:38 2009", "platform: VC-WIN32", "OPENSSLDIR: "c:/openssl/ssl""}
+Using ZLib version: 1.2.3
+
+Called from HTTPSSERVER(4528)
+Called from STARTSERVICE(285)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:39:01
+C:\server\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Terminating HTTP server...
+
+Called from TERMINATE(216)
+Called from STARTSERVICE(337)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:44:31
+C:\server\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+HTTPS server started on host: MASTER, Port: 443
+Using OpenSSL version: {"OpenSSL 0.9.8k 25 Mar 2009", "not available", "compiler: cl  /MD /Ox /O2 /Ob2 /W3 /WX /Gs0 /GF /Gy /nologo -DOPENSSL_SYSNAME_WIN32 -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -DDSO_WIN32 -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE -DOPENSSL_CPUID_OBJ -DOPENSSL_IA32_SSE2 -DAES_ASM -DBN_ASM -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_BN_ASM_MONT -DMD5_ASM -DSHA1_ASM -DRMD160_ASM -DOPENSSL_USE_APPLINK -I. /Fdout32dll -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_SEED -DOPENSSL_NO_RC5 -DOPENSSL_NO_MDC2 -DOPENSSL_NO_CMS -DOPENSSL_NO_JPAKE -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_KRB5 -DOPENSSL_NO_DYNAMIC_ENGINE    ", "built on: Thu Jul 23 09:28:38 2009", "platform: VC-WIN32", "OPENSSLDIR: "c:/openssl/ssl""}
+Using ZLib version: 1.2.3
+
+Called from HTTPSSERVER(4528)
+Called from STARTSERVICE(285)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:44:39
+C:\server\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Terminating HTTP server...
+
+Called from TERMINATE(216)
+Called from STARTSERVICE(337)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:47:28
+C:\mrtienda\SERVER\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+HTTPS server started on host: MASTER, Port: 443
+Using OpenSSL version: {"OpenSSL 0.9.8k 25 Mar 2009", "not available", "compiler: cl  /MD /Ox /O2 /Ob2 /W3 /WX /Gs0 /GF /Gy /nologo -DOPENSSL_SYSNAME_WIN32 -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -DDSO_WIN32 -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE -DOPENSSL_CPUID_OBJ -DOPENSSL_IA32_SSE2 -DAES_ASM -DBN_ASM -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_BN_ASM_MONT -DMD5_ASM -DSHA1_ASM -DRMD160_ASM -DOPENSSL_USE_APPLINK -I. /Fdout32dll -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_SEED -DOPENSSL_NO_RC5 -DOPENSSL_NO_MDC2 -DOPENSSL_NO_CMS -DOPENSSL_NO_JPAKE -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_KRB5 -DOPENSSL_NO_DYNAMIC_ENGINE    ", "built on: Thu Jul 23 09:28:38 2009", "platform: VC-WIN32", "OPENSSLDIR: "c:/openssl/ssl""}
+Using ZLib version: 1.2.3
+
+Called from HTTPSSERVER(4528)
+Called from STARTSERVICE(285)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20110506 13:47:35
+C:\mrtienda\SERVER\WEBSERVE.EXE, Thread: 1
+Windows XP 05.01 Build 02600 Service Pack 2, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Terminating HTTP server...
+
+Called from TERMINATE(216)
+Called from STARTSERVICE(337)
+Called from MAIN(204)
+
+= Xb2.NET LOG ==========
+Date: 20150618 10:05:04
+C:\MRTIENDA\SERVER\WEBSERVE.EXE, Thread: 1
+Windows Vista 06.02 Build 09200, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Unable to start HTTP server!
+Error code: 10048 (Address already in use)
+
+Called from HTTPSERVER(385)
+Called from STARTSERVICE(272)
+Called from MAIN(205)
+
+= Xb2.NET LOG ==========
+Date: 20150618 10:05:04
+C:\MRTIENDA\SERVER\WEBSERVE.EXE, Thread: 1
+Windows Vista 06.02 Build 09200, Xb2.NET: 3.2.13, Runtime: 1.90.355
+Terminating HTTP server...
+
+Called from TERMINATE(217)
+Called from STARTSERVICE(273)
+Called from MAIN(205)
+

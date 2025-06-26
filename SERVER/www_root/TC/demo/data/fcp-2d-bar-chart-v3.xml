@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="h" />
+	<header text="Benchmarks: SYSMark2004" font="Arial" color="000000" size="18" />
+	<subheader text="Comparative data, Archiving 100Mb file" font="Arial" color="7F7F7F" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="90" color="000000" size="10" title="Seconds" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="420" grid_height="250" grid_color="333333" grid_alpha="30" grid_thickness="1" bg_color="FFF9E1" bg_alpha="70" alternate_bg_color="FFFFFF" border_color="333333" border_thickness="1" />
+	<bars view_value="1" width="18" space="0.1" alpha="50" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="50" />
+	<data name="Albatron K8X890" value="-4.3" color="1896CF" />
+	<data name="MSI RS480M2-IL" value="-4.5" color="FF871E" />
+	<data name="ASRock 939Dual-SATA2" value="-3.9" color="2AC117" />
+	<data name="Chaintech Zenith VNF4" value="-3.8" color="FF1E24" />
+	<data name="DFI LANParty NF4 SLI-DR" value="-4.1" color="BD17C5" />
+	<data name="Epox 9NPA+ SLI" value="-4.7" color="D8F61D" />
+	<data name="ECS KN1 Extreme SLI" value="-5.1" color="162ABD" />
+	<data name="Asus A8N-VM CSM" value="-2.5" color="FFCC1E" />
+</graph>

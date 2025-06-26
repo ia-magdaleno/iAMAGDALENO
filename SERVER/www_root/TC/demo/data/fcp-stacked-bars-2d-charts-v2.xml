@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFAF5" type_graph="v" />
+	<header text="Shaper Byte volume by hour" font="Verdana" color="000000" size="18" />
+	<subheader text="12:00am - 1:00am 08 Sep 02" font="Verdana" color="000000" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="12" title="Giga-Bytes" title_color="000000" />
+	<Yheaders color="000000" size="12" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="350" grid_height="250" grid_color="000000" grid_alpha="20" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="FFF8F1" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="50" space="1" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40" />
+
+	<data>
+		<categorie name="Inbound">
+			<subcategorie name="London" value="30" color="9ACC0C" />
+			<subcategorie name="Paris" value="67" color="EE0EB4" />
+			<subcategorie name="Sydney" value="20" color="0D86E0" />
+			<subcategorie name="Tokyo" value="29" color="FF910F" />
+		</categorie>
+		<categorie name="Outbound">
+			<subcategorie name="London" value="24" color="9ACC0C" />
+			<subcategorie name="Paris" value="15" color="EE0EB4" />
+			<subcategorie name="Sydney" value="23" color="0D86E0" />
+			<subcategorie name="Tokyo" value="10" color="FF910F" />
+		</categorie>
+		<categorie name="Total">
+			<subcategorie name="London" value="54" color="9ACC0C" />
+			<subcategorie name="Paris" value="73" color="EE0EB4" />
+			<subcategorie name="Sydney" value="43" color="0D86E0" />
+			<subcategorie name="Tokyo" value="39" color="FF910F" />
+		</categorie>
+	</data>
+</graph>

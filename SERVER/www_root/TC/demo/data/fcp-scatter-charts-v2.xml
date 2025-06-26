@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="F3F3F3" showAnchor="1" showBubble="0" Bubble_gradient="1">
+		<header text="Effect of 1% Unemployment on Deficit, as % of GDP" font="Verdana" color="000000" size="18" />
+		<subheader text="(% of GDP, 1973 - projected 2000)" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFEFAF" font_size="10" />
+		<Xheaders show_calibration="1" rotate="0" color="000000" size="10" title="Excess Unemployment, % (Actual - CBO/NAIRU)" title_color="000000" />
+		<Yheaders color="000000" size="10" title="High(&quot;cyclical&quot;) unemployment Defioit" title_rotate="90" title_color="000000" />
+		<grid showX="1" showY="1" xAxisLines="5" yAxisLines="15" xAxisMinValue="0" xAxisMaxValue="10" yAxisMinValue="-5" yAxisMaxValue="15" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="40" grid_thickness="1" bg_color="FFFBEB" bg_alpha="100" alternate_bg_color="FFFBEB" border_color="000000" border_thickness="1" />
+	</general_settings>
+
+	<data seriesName="1973" color="FF0080" alpha="100" size="3">
+		<value x="0" y="-2.2" />
+		<value x="0.2" y="-1" />
+		<value x="0.5" y="0.3" />
+		<value x="1" y="1.5" />
+		<value x="1.5" y="3" />
+		<value x="2" y="3.8" />
+		<value x="2.9" y="5" />
+		<value x="3" y="" />
+		<value x="3.5" y="" />
+		<value x="4" y="6.3" />
+		<value x="4.5" y="7.5" />
+		<value x="5" y="8.3" />
+		<value x="5.5" y="9.1" />
+		<value x="6" y="10" />
+		<value x="6.5" y="11" />
+		<value x="7" y="12.8" />
+		<value x="7.5" y="" />
+		<value x="8" y="" />
+		<value x="8.5" y="" />
+	</data>
+	<data seriesName="1993" color="FF8040" alpha="100" size="3">
+		<value x="1" y="0.5" />
+		<value x="1.5" y="2.5" />
+		<value x="2.2" y="3.5" />
+		<value x="3" y="4.5" />
+		<value x="3" y="" />
+		<value x="3" y="" />
+		<value x="4" y="5.5" />
+		<value x="5" y="7.5" />
+		<value x="5.5" y="7.6" />
+		<value x="6" y="7.9" />
+		<value x="6.5" y="8.2" />
+		<value x="7" y="10.5" />
+	</data>
+	<data seriesName="2000" color="2A88FF" alpha="100" size="3">
+		<value x="2.4" y="3.1" />
+		<value x="3" y="3.9" />
+		<value x="3.4" y="4.2" />
+		<value x="3.8" y="4.2" />
+		<value x="4.3" y="4.4" />
+		<value x="4.7" y="4.6" />
+		<value x="5.1" y="4.9" />
+		<value x="5.5" y="5.2" />
+		<value x="5.9" y="5.8" />
+		<value x="6.4" y="6.4" />
+		<value x="7" y="6.9" />
+		<value x="7.4" y="" />
+		<value x="7.8" y="7.4" />
+		<value x="8.5" y="7.2" />
+		<value x="8.9" y="7.5" />
+		<value x="9.4" y="8.2" />
+	</data>
+</graph>

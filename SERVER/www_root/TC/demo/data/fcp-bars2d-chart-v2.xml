@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="h" />
+	<header text="Trade with America 2004-2006" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="$, Million" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="300" grid_height="200" grid_color="000000" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="F9F9F9" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="12" space="0.5" alpha="75" view_double_bar="1" color_double_bar="ffffff" pieces_grow_bar="30" />
+	<data>
+		<categorie name="2004">
+			<subcategorie name="Exports" value="32.4" color="5A96FF" />
+			<subcategorie name="Imports" value="20.7" color="EBFF5A" />
+			<subcategorie name="Total" value="53.1" color="FF735A" />
+		</categorie>
+		<categorie name="2005">
+			<subcategorie name="Exports" value="33.4" color="5A96FF" />
+			<subcategorie name="Imports" value="26.4" color="EBFF5A" />
+			<subcategorie name="Total" value="59.5" color="FF735A" />
+		</categorie>
+		<categorie name="2006">
+			<subcategorie name="Exports" value="34.1" color="5A96FF" />
+			<subcategorie name="Imports" value="25.8" color="EBFF5A" />
+			<subcategorie name="Total" value="62" color="FF735A" />
+		</categorie>
+	</data>
+</graph>

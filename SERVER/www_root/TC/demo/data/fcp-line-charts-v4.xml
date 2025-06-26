@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" showAnchor="0" showArea="1" type_animation="2">
+		<header text="Advanced Web Statistics and Reports" font="Verdana" color="000000" size="18" />
+		<subheader text="Web Statistics for Google.com (1/1/2006)" font="Verdana" color="000000" size="14" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="1/1/2006" title_color="000000" />
+		<Yheaders color="000000" size="10" title="NFS Server Calls, x1000" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="175" grid_width="550" grid_height="250" grid_color="ACB9E6" grid_alpha="40" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="F6F8FF" border_color="000000" border_thickness="1" />
+	</general_settings>
+	<abscissa_data>
+		<x value="00:00" />
+		<x value="01:00" />
+		<x value="02:00" />
+		<x value="03:00" />
+		<x value="04:00" />
+		<x value="05:00" />
+		<x value="06:00" />
+		<x value="07:00" />
+		<x value="08:00" />
+		<x value="09:00" />
+		<x value="10:00" />
+		<x value="11:00" />
+		<x value="12:00" />
+		<x value="13:00" />
+		<x value="14:00" />
+		<x value="15:00" />
+		<x value="16:00" />
+		<x value="17:00" />
+		<x value="18:00" />
+		<x value="19:00" />
+		<x value="20:00" />
+		<x value="21:00" />
+		<x value="22:00" />
+		<x value="23:00" />
+	</abscissa_data>
+	<ordinate_data seriesName="Hosts" color="FF0000" size="3.5">
+		<y value="23" />
+		<y value="40" />
+		<y value="62" />
+		<y value="118" />
+		<y value="130" />
+		<y value="139" />
+		<y value="158" />
+		<y value="233" />
+		<y value="297" />
+		<y value="379" />
+		<y value="503" />
+		<y value="687" />
+		<y value="746" />
+		<y value="857" />
+		<y value="973" />
+		<y value="1125" />
+		<y value="1320" />
+		<y value="1518" />
+		<y value="1797" />
+		<y value="1893" />
+		<y value="2010" />
+		<y value="2057" />
+		<y value="2166" />
+		<y value="2197" />
+	</ordinate_data>
+	<ordinate_data seriesName="Unique visitors" color="0080C0" size="3.5">
+		<y value="98" />
+		<y value="1112" />
+		<y value="1192" />
+		<y value="1219" />
+		<y value="1264" />
+		<y value="1282" />
+		<y value="1365" />
+		<y value="1433" />
+		<y value="1559" />
+		<y value="1823" />
+		<y value="1867" />
+		<y value="2198" />
+		<y value="1112" />
+		<y value="1192" />
+		<y value="1219" />
+		<y value="2264" />
+		<y value="2282" />
+		<y value="2365" />
+		<y value="2433" />
+		<y value="2559" />
+		<y value="2823" />
+		<y value="2867" />
+		<y value="2867" />
+		<y value="2867" />
+	</ordinate_data>
+	<ordinate_data seriesName="Hits" color="FF8040" size="3.5">
+		<y value="115" />
+		<y value="141" />
+		<y value="175" />
+		<y value="189" />
+		<y value="208" />
+		<y value="229" />
+		<y value="252" />
+		<y value="440" />
+		<y value="608" />
+		<y value="889" />
+		<y value="1334" />
+		<y value="456" />
+		<y value="1000" />
+		<y value="2600" />
+		<y value="3070" />
+		<y value="3451" />
+		<y value="3918" />
+		<y value="4140" />
+		<y value="4296" />
+		<y value="4519" />
+		<y value="4716" />
+		<y value="2881" />
+		<y value="1092" />
+		<y value="522" />
+	</ordinate_data>
+</graph>

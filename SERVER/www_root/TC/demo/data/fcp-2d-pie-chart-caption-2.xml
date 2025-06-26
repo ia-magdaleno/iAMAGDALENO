@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" bagel="1" animation="1" />
+	<header text="Répartition des élèves du cycle international d'administration publique 2006" font="Verdana" color="000000" size="14" />
+	<subheader text="Par zones géographiques, En date du 13/10/05" font="Verdana" color="666666" size="10" />
+	<legend show="1" font="Verdana" font_color="000000" font_size="10" bgcolor="FFF8F0" alternate_bg_color="FFFEFA" border_color="000000" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="110" alpha="100" />
+		<data name="Amériques" value="9" color="266AC0" distance_sliced="0" />
+		<data name="Afrique du Nord" value="35" color="FFB033" distance_sliced="0" />
+		<data name="Afrique" value="9" color="FF4433" distance_sliced="0" />
+		<data name="Europe" value="2" color="27C145" distance_sliced="0" />
+		<data name="Union europêene" value="25" color="9825BA" distance_sliced="0" />
+		<data name="Asie-Océanie" value="20" color="E8F531" distance_sliced="0" />
+</graph>

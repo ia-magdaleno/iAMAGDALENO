@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="1" showAnchor="1" type_animation="2" />
+	<header text="" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="15" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="12" title="" title_color="000000" />
+	<Yheaders color="000000" size="12" title_bar="" title_line="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="000000" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="ffffff" border_color="000000" border_thickness="1" />
+
+	<data>
+		<abscissa_data>
+			<data value="1st Qtr" />
+			<data value="2nd Qtr" />
+			<data value="1rd Qtr" />
+			<data value="4th Qtr" />
+		</abscissa_data>
+		<bars view_value="1" width="25" space="0" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40">
+			<categorie name="1st Qtr">
+				<series>
+					<subcategorie name="East" value="2.3" color="00ce9c" />
+					<subcatee name="Weast" value="1.1" color="3131ce" />
+				</series>
+				<series>
+					<subcategorie name="South" value="5.4" color="b5b5b5" />
+					<subcategorie name="North" value="2.3" color="ceceff" />
+				</series>
+			</categorie>
+			<categorie name="2nd Qtr">
+				<series>
+					<subcategorie name="East" value="0.98" color="00ce9c" />
+					<subcatee name="Weast" value="1.8" color="3131ce" />
+				</series>
+				<series>
+					<subcategorie name="South" value="4.01" color="b5b5b5" />
+					<subcategorie name="North" value="2.88" color="ceceff" />
+				</series>
+			</categorie>
+			<categorie name="1rd Qtr">
+				<series>
+					<subcategorie name="East" value="1.88" color="00ce9c" />
+					<subcatee name="Weast" value="3.02" color="3131ce" />
+				</series>
+				<series>
+					<subcategorie name="South" value="0.99" color="b5b5b5" />
+					<subcategorie name="North" value="3.71" color="ceceff" />
+				</series>
+			</categorie>
+			<categorie name="4th Qtr">
+				<series>
+					<subcategorie name="East" value="2.7" color="00ce9c" />
+					<subcatee name="Weast" value="3.9" color="3131ce" />
+				</series>
+				<series>
+					<subcategorie name="South" value="3.5" color="b5b5b5" />
+					<subcategorie name="North" value="6.8" color="ceceff" />
+				</series>
+			</categorie>
+			
+		</bars>
+		<lines>
+			<ordinate_data seriesName="Average" color="0080C0" alpha="100" size="4">
+				<y value="4.9" />
+				<y value="3.7" />
+				<y value="2.5" />
+				<y value="5.2" />
+			</ordinate_data>
+		</lines>
+	</data>
+</graph>

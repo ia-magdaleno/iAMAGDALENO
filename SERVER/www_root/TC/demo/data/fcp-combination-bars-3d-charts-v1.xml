@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+
+	<general_settings show_background_side="1" bg_color='FFFFFF' background_side_color='f2f2f2' floor_color='f2f2f2' common_calibrationYaxis='1' showAnchor="1" type_animation="2"/>
+	<header  text='Yearly Registered Drivers License' font='Verdana' color='000000' size='16'/> 
+	<subheader  text='' font='Verdana' color='000000' size='15'/> 
+	<legend_popup font='Verdana' bgcolor='FFFFE3' font_size='10'/>
+	<Xheaders rotate='0' color='000000' size='10' title='' title_color='000000'/>
+	<Yheaders color='000000' size='10' title_bar='' title_line='' title_rotate='90' title_color='000000'/>
+	<grid groove='1' grid_width='350' grid_height='225' grid_color='000000' grid_alpha='40' grid_thickness='1'/>
+	
+	<abscissa_data>
+		<data value="1996" /> 
+		<data value="1997" /> 
+		<data value="1998" /> 
+	</abscissa_data>
+	
+	<bars name='New Drivers License' view_value='0' width='40' thickness='10' color="99ff99"  alpha='100' pieces_grow_bar='40'>
+		<bar  value="2199" color="99ff99" /> 
+		<bar  value="3513" color="99ff99" /> 
+		<bar  value="2762" color="99ff99" /> 
+	</bars>
+	
+	<lines>
+		<ordinate_data seriesName='Renew al Drivers License' color='cc99ff' alpha="100" size='5'>
+			<y value='4839'/>
+			<y value='5687'/>
+			<y value='4106'/>
+		</ordinate_data>
+	</lines>
+
+</graph>

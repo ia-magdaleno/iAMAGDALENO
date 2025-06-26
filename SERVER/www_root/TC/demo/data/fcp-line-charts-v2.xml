@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="F0E7E2" showAnchor="0" showArea="0" type_animation="2">
+		<header text="Forecasting whale food supply" font="Verdana" color="000000" size="18" />
+		<subheader text="Calanus plankton" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="40-year graph" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Whale food supply (Calanus index)" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="100" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="40" grid_thickness="1" bg_color="FEFFFF" bg_alpha="100" alternate_bg_color="FFFDFB" border_color="000000" border_thickness="1" />
+	</general_settings>
+	<abscissa_data>
+		<x value="1960" />
+		<x value="1965" />
+		<x value="1970" />
+		<x value="1975" />
+		<x value="1980" />
+		<x value="1985" />
+		<x value="1990" />
+		<x value="1995" />
+		<x value="2000" />
+		<x value="2005" />
+		<x value="2010" />
+	</abscissa_data>
+	<ordinate_data seriesName="Forecasts based on slope water temperature" color="0080C0" size="3.5">
+		<y value="3.6" />
+		<y value="7.1" />
+		<y value="0" />
+		<y value="-1.2" />
+		<y value="-2.5" />
+		<y value="-5.0" />
+		<y value="-2.3" />
+		<y value="-0.4" />
+		<y value="2.3" />
+		<y value="4.7" />
+		<y value="5.9" />
+	</ordinate_data>
+	<ordinate_data seriesName="Forecasts based on NAO index" color="FF0000" size="3.5">
+		<y value="-1.6" />
+		<y value="-2.1" />
+		<y value="-3.5" />
+		<y value="-2.9" />
+		<y value="-1.7" />
+		<y value="" />
+		<y value="1.3" />
+		<y value="2.4" />
+		<y value="5.3" />
+		<y value="3.7" />
+		<y value="2.9" />
+	</ordinate_data>
+	<ordinate_data seriesName="Calnus index" color="FF0080" size="3.5">
+		<y value="" />
+		<y value="-7.5" />
+		<y value="4.6" />
+		<y value="2.5" />
+		<y value="1.9" />
+		<y value="-2.1" />
+		<y value="-2.9" />
+		<y value="-3.3" />
+		<y value="-2.3" />
+		<y value="-1.0" />
+		<y value="0" />
+	</ordinate_data>
+</graph>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" bagel="0" animation="1" />
+	<header text="Energy Efficiency in Business" font="Verdana" color="000000" size="15" />
+	<subheader text="Breakdown of electricity usage in commercial buildings" font="Verdana" color="000000" size="10" />
+	<legend show="1" font="Verdana" font_color="000000" font_size="10" bgcolor="ffffff" alternate_bg_color="EAEAEA" border_color="000000" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="100" alpha="100" />
+		<data name="Miscellaneous" value="20" color="EC0033" distance_sliced="0" />
+		<data name="Lighting" value="38.65" color="004CB0" distance_sliced="0" />
+		<data name="Ventilation" value="13.43" color="FF7300" distance_sliced="8" />
+		<data name="Cooling" value="7.42" color="999999" distance_sliced="8" />
+		<data name="Refrigeration" value="4.24" color="00B869" distance_sliced="8" />
+		<data name="Office Equipment" value="2.83" color="FFCD00" distance_sliced="8" />
+		<data name="Cooking" value="13.43" color="A0D300" distance_sliced="8" />
+</graph>

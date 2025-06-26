@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" showAnchor="0" showArea="1" type_animation="2">
+		<header text="Permanent factors" font="Verdana" color="000000" size="18" />
+		<subheader text="" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="" title_color="000000" />
+		<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="175" grid_width="550" grid_height="250" grid_color="FFEFAF" grid_alpha="40" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="FFFCF0" border_color="000000" border_thickness="2" />
+	</general_settings>
+	<abscissa_data>
+		<x value="00:00" />
+		<x value="01:00" />
+		<x value="02:00" />
+		<x value="03:00" />
+		<x value="04:00" />
+		<x value="05:00" />
+		<x value="06:00" />
+		<x value="07:00" />
+		<x value="08:00" />
+		<x value="09:00" />
+		<x value="10:00" />
+		<x value="11:00" />
+		<x value="12:00" />
+		<x value="13:00" />
+		<x value="14:00" />
+		<x value="15:00" />
+		<x value="16:00" />
+		<x value="17:00" />
+		<x value="18:00" />
+		<x value="19:00" />
+		<x value="20:00" />
+		<x value="21:00" />
+		<x value="22:00" />
+		<x value="23:00" />
+	</abscissa_data>
+	<ordinate_data seriesName="Saturday" color="0080C0" size="3.5">
+		<y value="-36" />
+		<y value="-71" />
+		<y value="-85" />
+		<y value="-92" />
+		<y value="-101" />
+		<y value="-116" />
+		<y value="-164" />
+		<y value="-180" />
+		<y value="-192" />
+		<y value="-262" />
+		<y value="-319" />
+		<y value="-489" />
+		<y value="-633" />
+		<y value="-904" />
+		<y value="-1215" />
+		<y value="-1358" />
+		<y value="-1482" />
+		<y value="-1666" />
+		<y value="-1811" />
+		<y value="-2051" />
+		<y value="-2138" />
+		<y value="-2209" />
+		<y value="-2247" />
+		<y value="-2301" />
+	</ordinate_data>
+	<ordinate_data seriesName="Friday" color="FF0000" size="3.5">
+		<y value="-23" />
+		<y value="-40" />
+		<y value="-62" />
+		<y value="-118" />
+		<y value="-130" />
+		<y value="-139" />
+		<y value="-158" />
+		<y value="-233" />
+		<y value="-297" />
+		<y value="-379" />
+		<y value="-503" />
+		<y value="-687" />
+		<y value="-746" />
+		<y value="-857" />
+		<y value="-973" />
+		<y value="-1125" />
+		<y value="-1320" />
+		<y value="-1518" />
+		<y value="-1797" />
+		<y value="-1893" />
+		<y value="-2010" />
+		<y value="-2057" />
+		<y value="-2166" />
+		<y value="-2197" />
+	</ordinate_data>
+</graph>

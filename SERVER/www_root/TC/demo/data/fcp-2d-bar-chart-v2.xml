@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFF8F0" type_graph="h" />
+	<header text="Decline in Net Interest Margins of Asian Banks" font="Verdana" color="000000" size="18" />
+	<subheader text="From For period 1995-2001, in Percentage %" font="Verdana" color="595959" size="12" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Points" title_color="000000" />
+	<Yheaders color="000000" size="10" title="Countries" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="EDEDED" grid_alpha="100" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="FFFFFE" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="22" space="0.5" alpha="70" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="0" />
+	<data name="Singapore" value="-0.52" color="B6D90D" />
+	<data name="India" value="0.2" color="D90D56" />
+	<data name="Thailand" value="-1.6" color="0BB13A" />
+	<data name="Malaysia" value="2.2" color="F66E0F" />
+	<data name="Taiwan" value="-0.3" color="0B63B0" />
+	<data name="Hong Kong" value="0.5" color="F6BD0F" />
+	<data name="Philippines" value="1.4" color="470AA3" />
+</graph>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="1" showAnchor="1" type_animation="2" />
+	<header text="Le Marché du Spa on volume, 2000 уе 2001 (vente/unité)" font="Verdana" color="000000" size="12" />
+	<subheader text="Prévisionnel (pour les années 2002, 2003 et 2004)" font="Verdana" color="000000" size="12" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title_bar="" title_line="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="f7f3f8" grid_alpha="100" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="ffffff" border_color="9e71ac" border_thickness="2" />
+
+	<abscissa_data>
+		<data value="2000" />
+		<data value="2001" />
+		<data value="2002" />
+		<data value="2003" />
+		<data value="2004" />
+	</abscissa_data>
+
+	<bars view_value="1" width="40" space="1" alpha="100" view_double_bar="1" color_double_bar="b7a6a8" pieces_grow_bar="40">
+		<categorie name="2000">
+			<subcategorie name="Norvege" value="72" color="f2b602" />
+			<subcategorie name="Suéde" value="11" color="a90172" />
+			<subcategorie name="Finlende" value="7" color="f49cbd" />
+			<subcategorie name="Danemark" value="265" color="a90172" />
+			<subcategorie name="France" value="273" color="a90172" />
+			<subcategorie name="UK" value="350" color="75368a" />
+			<subcategorie name="Allemagne" value="400" color="1065b0" />
+			<subcategorie name="Italio" value="78" color="0292d7" />
+			<subcategorie name="Espagne" value="250" color="81c5e1" />
+			<subcategorie name="Pologne" value="10" color="aeddf5" />
+			<subcategorie name="Rép Tehéque" value="27" color="3bb9e2" />
+			<subcategorie name="Rassia" value="83" color="91cc70" />
+		</categorie>
+		<categorie name="2001">
+			<subcategorie name="Norvege" value="102" color="f2b602" />
+			<subcategorie name="Suéde" value="14" color="a90172" />
+			<subcategorie name="Finlende" value="9" color="f49cbd" />
+			<subcategorie name="Danemark" value="370" color="a90172" />
+			<subcategorie name="France" value="321" color="a90172" />
+			<subcategorie name="UK" value="380" color="75368a" />
+			<subcategorie name="Allemagne" value="435" color="1065b0" />
+			<subcategorie name="Italio" value="140" color="0292d7" />
+			<subcategorie name="Espagne" value="247" color="81c5e1" />
+			<subcategorie name="Pologne" value="8" color="aeddf5" />
+			<subcategorie name="Rép Tehéque" value="50" color="3bb9e2" />
+			<subcategorie name="Rassia" value="110" color="91cc70" />
+		</categorie>
+		<categorie name="2002">
+			<subcategorie name="Norvege" value="121" color="f2b602" />
+			<subcategorie name="Suéde" value="19" color="a90172" />
+			<subcategorie name="Finlende" value="12" color="f49cbd" />
+			<subcategorie name="Danemark" value="380" color="a90172" />
+			<subcategorie name="France" value="350" color="a90172" />
+			<subcategorie name="UK" value="410" color="75368a" />
+			<subcategorie name="Allemagne" value="470" color="1065b0" />
+			<subcategorie name="Italio" value="153" color="0292d7" />
+			<subcategorie name="Espagne" value="250" color="81c5e1" />
+			<subcategorie name="Pologne" value="10" color="aeddf5" />
+			<subcategorie name="Rép Tehéque" value="61" color="3bb9e2" />
+			<subcategorie name="Rassia" value="130" color="91cc70" />
+		</categorie>
+		<categorie name="2003">
+			<subcategorie name="Norvege" value="132" color="f2b602" />
+			<subcategorie name="Suéde" value="21" color="a90172" />
+			<subcategorie name="Finlende" value="15" color="f49cbd" />
+			<subcategorie name="Danemark" value="395" color="a90172" />
+			<subcategorie name="France" value="367" color="a90172" />
+			<subcategorie name="UK" value="423" color="75368a" />
+			<subcategorie name="Allemagne" value="485" color="1065b0" />
+			<subcategorie name="Italio" value="174" color="0292d7" />
+			<subcategorie name="Espagne" value="264" color="81c5e1" />
+			<subcategorie name="Pologne" value="13" color="aeddf5" />
+			<subcategorie name="Rép Tehéque" value="71" color="3bb9e2" />
+			<subcategorie name="Rassia" value="150" color="91cc70" />
+		</categorie>
+		<categorie name="2004">
+			<subcategorie name="Norvege" value="152" color="f2b602" />
+			<subcategorie name="Suéde" value="29" color="a90172" />
+			<subcategorie name="Finlende" value="23" color="f49cbd" />
+			<subcategorie name="Danemark" value="399" color="a90172" />
+			<subcategorie name="France" value="377" color="a90172" />
+			<subcategorie name="UK" value="483" color="75368a" />
+			<subcategorie name="Allemagne" value="495" color="1065b0" />
+			<subcategorie name="Italio" value="184" color="0292d7" />
+			<subcategorie name="Espagne" value="274" color="81c5e1" />
+			<subcategorie name="Pologne" value="17" color="aeddf5" />
+			<subcategorie name="Rép Tehéque" value="83" color="3bb9e2" />
+			<subcategorie name="Rassia" value="167" color="91cc70" />
+		</categorie>
+		
+	</bars>
+
+	<lines>
+		<ordinate_data seriesName="Trend" color="ff0024" alpha="100" size="4">
+			<y value="1821" />
+			<y value="2200" />
+			<y value="2350" />
+			<y value="2500" />
+			<y value="2700" />
+		</ordinate_data>
+	
+	</lines>
+</graph>

@@ -1,0 +1,1610 @@
+#include "xb2net.ch"
+#include "common.ch"
+#pragma  library ("xb2net.lib")
+
+#xtranslate NTrim(<n>)        =>  LTrim(Str(<n>))
+
+//#xtranslate Debug([<p,...>])  =>  QOut(<p>)
+#xtranslate Debug([<p,...>])  =>
+// security levels:
+#define SEC_NONE          0
+#define SEC_EMPLOYEE      1
+#define SEC_SUPERVISOR    2
+#define SEC_ADMIN         3
+
+#xtranslate GETVAR <(name)> AS <var>     => Local <var> := oClient:GetVar(<(name)>)
+#xtranslate GETCARGO <(name)> AS <var>   => Local <var> := oClient:GetCargo(<(name)>)
+#xtranslate GETCOOKIE <(name)> AS <var>  => Local <var> := oClient:GetCookie(<(name)>)
+
+#command WEBPROCEDURE <name>([<param,...>])         ;
+         [VAR <(fname)> AS <fvar>]                  ;
+         [COOKIE <(cname)> AS <cvar>]               ;
+         [CARGO <(sname)> AS <svar>]                ;
+            => PROCEDURE WEB_<name>(<param>)        ;
+               ; Local oClient := ThreadObject()    ;
+               [; GETVAR <(fname)> AS <fvar>]       ;
+               [; GETCOOKIE <(cname)> AS <cvar>]    ;
+               [; GETCARGO <(sname)> AS <svar>]
+
+#command WEBPROCEDURE <name>([<param,...>])         ;
+         PATH <path>                                ;
+         [VAR <(fname)> AS <fvar>]                  ;
+         [COOKIE <(cname)> AS <cvar>]               ;
+         [CARGO <(sname)> AS <svar>]                ;
+            => PROCEDURE WEB_<path>_<name>(<param>) ;
+               ; Local oClient := ThreadObject()    ;
+               [; GETVAR <(fname)> AS <fvar>]       ;
+               [; GETCOOKIE <(cname)> AS <cvar>]    ;
+               [; GETCARGO <(sname)> AS <svar>]
+
+#command CHECKLOGIN ;
+         => if ! isLoggedIn() ;
+         ;     return ;
+         ;  endif
+
+#command CHECKLOGIN SECURITY [<nSecLevel>] ;
+         => if ! isLoggedIn() .or. ! HaveSecurityPrivilege(<nSecLevel>) ;
+         ;     return ;
+         ;  endif
+
+
+//-----------------------------------------------------------------------------
+// This function is the entry point into the TimeClock app
+//
+WEBPROC Login() PATH TC
+	GETVAR UID AS cUID
+	GETVAR PWD AS cPWD
+	Local lUpdate  := .t.
+	Local cMessage := ""
+	Local oServer  := oClient:Parent  // this is the xbHTTPServer object
+	Local nID
+	Local cFILENAME := cDBFPATH + 'PAREA.DBF', aFILES
+
+	   oClient:CloseSession()
+
+	   debug( "TC_Login 1: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+	   if Empty(cUID) .or. .not. FExists( cFileName )
+	      // no user ID specified - redisplay login screen
+	      oClient:SendFile( oServer:RootDir + "\TC\Login.htm" )
+	      Return
+	   endif
+
+	aFILES := dARRAY({'PAREA'})
+	fVIDMAIN(.t., aFILES)
+
+	PAREA->( ordsetfocus( 5))
+	If .not. ( PAREA->(DbSeek(UPPER(cPWD))) .and. Upper(ALLTRIM(cUID)) == UPPER(ALLTRIM(PAREA->DES_EMPLEA)) .and. PAREA->FTP .and. ALLTRIM(UPPER(cPWD)) ==  ALLTRIM(UPPER(PAREA->PASSWORD)) .AND. .NOT. EMPTY(cPWD) .and. .not. fFUERA_HORARIO())
+	      dbCLoseAll()
+	      oClient:SendFile( oServer:RootDir + "\TC\Login.htm" )
+		Return
+	EndIf
+
+	   // we have a valid userid/password
+
+	   // make sure any previous session is properly closed
+	   oClient:CloseSession()
+
+	   // the GetCargo/SetCargo methods will automatically open a new session to keep track of this guy
+
+	   if oClient:GetCargo("UID") != NIL
+	      if oClient:GetCargo("UID") == nID
+		 // same guy, don't update login count in password table
+		 lUpdate := .f.
+	      else
+		 // this client was previously logged in under a different userid
+		 // close the old session
+		 oClient:CloseSession()
+	      endif
+	   endif
+
+	   oClient:SetCargo("UID"       , cUID)
+	   oClient:SetCargo("NAME"      , AllTrim(PAREA->DES_EMPLEA))
+	   oClient:SetCargo("SECURITY"  , 3 )  // save the security level   PAREA->ACCESO_3
+	   oClient:SetCargo("EXCEPTIONS", 'NADA' ) // emp->(GetExceptions())
+	   oClient:SetCargo("ACCESO_3"  , PAREA->ACCESO_3 ) 
+	   
+	   fVIDMAIN(.F., aFILES)
+
+	   debug( "TC_Login 2: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+	   // attach the response string to the HTTP response object
+	   oClient:HTTPResponse:Content := DrawOuterFrame( oClient:GetSessionHandle() )
+	   
+
+ Return
+ 
+ 
+
+//-----------------------------------------------------------------------------
+// Close session and exit TimeClock app. Client browser is taken back to Login screen.
+//
+WEBPROC Logout() PATH TC
+   GETVAR UID AS nID
+
+   oClient:CloseSession()
+
+   FlashMessage( "You are now logged out...", "/", 2)
+   debug( "TC_Logout: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+   Return
+
+//-----------------------------------------------------------------------------
+// After a user successfully logs in, this function will draw the outer frameset
+// for the TimeClock app. This frameset contains a small 'header' frame along the
+// top for common hyperlink shortcuts and a 'main' frame where the TimeClock app
+// will be drawn.
+//
+// Although we can use client-side "cookies" to perform session management automatically.
+// This will fail when a client has cookie support turned off. To make it work for all
+// cases we need to pass the unique session handle within each URL hyperlink pointing
+// back to the server.
+//
+STATIC FUNCTION DrawOuterFrame( cSessionHandle )
+   Static cTemplate
+
+
+   if cTemplate == NIL
+   
+      TEXT INTO cTemplate TRIMMED
+      <!doctype html public "-//w3c//dtd html 4.0 frameset//en">
+      <html>
+
+      <head>
+        <title>MrTienda WebServer</title>
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <style type="text/css">
+        body {margin:0px;}
+
+        #red {position:absolute;
+              top:0; left:0;
+              width:100%;
+              background-color:#FF3300;}
+	      
+        </style>
+        </head>
+
+	<frameset rows="10%,9%,*" frameborder=no border=0>
+        <frame name=header src=Header?<%sid%> marginwidth=0 marginheight=0 frameborder=no scrolling=no noresize >
+        <frame name=Negocio src=Negocio?<%sid%> marginwidth=0 marginheight=0 frameborder=no scrolling=no noresize>
+        <frame name=main   src=TimeClock?<%sid%> marginwidth=0 marginheight=0 frameborder=no scrolling=auto>
+        </frameset>
+
+      <noframes>
+        <body>
+        <div id="red"></div>
+        <center>
+        <br><br><br>
+        This page uses frames.<br>
+        Your browser either does not support frames or you have turned frame support off.<p>
+        <b><a href="TimeClock?" target="_top">click here to continue without frames</a></b>
+        </center>
+        </body>
+        </noframes>
+
+      </html>
+      ENDTEXT
+   endif
+
+   Return StrTran(cTemplate, "<%sid%>", "_SID=" + cSessionHandle)
+
+
+//-----------------------------------------------------------------------------
+WEBPROC Header() PATH TC
+   GETCARGO SECURITY AS nSecurity
+   Static cTemplate
+   Local cSID := oClient:GetSessionHandle()
+   Local cLinks, cLOCALIDAD := ''
+
+   CHECKLOGIN
+
+   if Empty(nSecurity)
+      oClient:SendFile( oClient:Parent:RootDir + "\TC\Login.htm" )
+      Return
+   endif
+
+   debug( "TC_Header: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+   if cTemplate == NIL
+
+/*
+<meta http-equiv="refresh" content="10" >
+*/
+      TEXT INTO cTemplate TRIMMED
+      <html>
+      <head>
+       <title>Http MrTienda</title>
+       <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+       <style type="text/css">
+	</style>
+	</head>
+	<body>
+	<img src="<%anuncio%>"  align="left"  usemap="#h4dmap">
+	<map name="h4dmap">
+	  <area shape="rect" coords = "0,0,220,084" href="<%ref1%>"     TARGET = "ventana-1">
+	  <area shape="rect" coords = "225,0,407,084" href="<%ref2%>"  TARGET = "ventana-2">
+	  <area shape="rect" coords = "410,0,600,084" href="<%ref3%>"  TARGET = "ventana-3">
+	  <area shape="rect" coords = "605,0,795,084" href="<%ref4%>"  TARGET = "ventana-4">
+	  <area shape="rect" coords = "800,0,1000,084" href="<%ref5%>" TARGET = "ventana-5">
+	  </map>
+	</body>
+	</html>
+      ENDTEXT
+      
+EndIf
+
+   *
+   * insertar banner de publicidad que corresponda a la zona !
+   *
+   If aINFOKEY[8] // incluir publicidad
+
+	cLOCALIDAD := aANUNCIOS[nPOS_ANUNCIOS,1] 
+	cTEMPLATE := StrTran(cTemplate, "<%ref1%>", aANUNCIOS[nPOS_ANUNCIOS,2], 1, 1)
+	cTEMPLATE := StrTran(cTemplate, "<%ref2%>", aANUNCIOS[nPOS_ANUNCIOS,3], 1, 1)
+	cTEMPLATE := StrTran(cTemplate, "<%ref3%>", aANUNCIOS[nPOS_ANUNCIOS,4], 1, 1)
+	cTEMPLATE := StrTran(cTemplate, "<%ref4%>", aANUNCIOS[nPOS_ANUNCIOS,5], 1, 1)
+	cTEMPLATE := StrTran(cTemplate, "<%ref5%>", aANUNCIOS[nPOS_ANUNCIOS,6], 1, 1)
+	nPOS_ANUNCIOS++
+	If nPOS_ANUNCIOS > LEN(aANUNCIOS)
+		nPOS_ANUNCIOS := 1
+	EndIf
+
+   Else
+	cLOCALIDAD := "/mibanner.gif" // banner propio de la empresa : paga renta mayor !
+   EndIf
+   
+   oClient:HTTPResponse:Content := StrTran(cTemplate, "<%anuncio%>", cLOCALIDAD, 1, 1)
+
+Return
+
+//-----------------------------------------------------------------------------
+STATIC FUNCTION HeaderLink( cDisplay, cFunction, cSID )
+   Return '<td class=link><img src=/4dot.gif> <a href=' + cFunction +;
+          '?_SID=' + cSID + ' class="cold" title="' + cDisplay +;
+          '" target=main>' + cDisplay + '</a></td>'
+
+
+//-----------------------------------------------------------------------------
+/*WEBPROC Inferior() PATH TC
+   GETCARGO SECURITY AS nSecurity
+   Static cTemplate
+   Local cSID := oClient:GetSessionHandle()
+   Local cLinks
+
+   CHECKLOGIN
+
+   if Empty(nSecurity)
+      oClient:SendFile( oClient:Parent:RootDir + "\TC\Login.htm" )
+      Return
+   endif
+
+   debug( "TC_Inferior: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+   if cTemplate == NIL
+      TEXT INTO cTemplate TRIMMED
+      <html>
+      <head>
+       <title>Http MrTienda</title>
+       <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+       <style type="text/css">
+	</style>
+	</head>
+	<body>
+	<HR>
+	<TABLE ALIGN="CENTER" width="99%">
+	<TR>
+	<TD align='left'> <b> &#169 2008 MrSoft SA de CV</b> </TD> <TD> <font color = "#000080"><center><B>Servidor HTTP WebServer</center></font>  </TD> <TD align='right'><%EXPIRA%></B> </TD><TD align='right'><font color = "#800000"><%VENCE%></B> </TD>
+	</TR>
+	</TABLE>
+	
+	</body>
+	</html>
+      ENDTEXT
+   endif
+
+cTEMPLATE := StrTran(cTemplate, "<%VENCE%>", Alltrim(Str(aINFOKEY[10])) + 'd' , 1, 1)
+cTEMPLATE := StrTran(cTemplate, "<%EXPIRA%>", If(lSINLLAVE,'DEMOSTRACION','ABIERTO') , 1, 1)
+oClient:HTTPResponse:Content := cTEMPLATE
+
+Return
+*/
+
+//-----------------------------------------------------------------------------
+WEBPROC Negocio() PATH TC
+   Static cTemplate
+   Local cSID := oClient:GetSessionHandle()
+   Local cLinks
+
+   debug( "TC_Negocio: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+   if cTemplate == NIL
+      TEXT INTO cTemplate TRIMMED
+      <html>
+      <head>
+       <title>Datos del Negocio</title>
+       <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+       <style type="text/css">
+	</style>
+	</head>
+	<body BGCOLOR="FFFAFF">
+	<HR>
+	<TABLE ALIGN="CENTER" width="99%">
+	<TR>
+	<TD align='left'> <b><a href="TimeClock?" target = main >Menu</a></b> </TD> <TD> <font color = "#000080"><center><B><%EMPRESA%></center></font>  </TD> <TD align='right'>usuario: <%EMPLEADO%></B> </TD>
+	</TR>
+	</TABLE>
+	<HR>
+	</body>
+	</html>
+      ENDTEXT
+   endif
+
+   cTemplate := StrTran(cTemplate, "<%cSID%>"   , cSID,1, 1)
+   cTemplate := StrTran(cTemplate, "<%EMPRESA%>"   , Alltrim(aINFOKEY[3]),1, 1)
+   cTemplate := StrTran(cTemplate, "<%EMPLEADO%>"   , ALLTRIM(oClient:GetCargo("NAME")) ,1, 1)
+   oClient:HTTPResponse:Content := StrTran(cTemplate, "<%links%>", cLinks, 1, 1)
+
+Return
+
+
+//-----------------------------------------------------------------------------
+WEBPROC TimeClock() PATH TC
+   GETCARGO UID    AS nID
+   GETVAR   ACTION AS cAction
+   Local cTime, cFilter, cDate, aParam
+
+   debug( "TimeClock: SID", oClient:GetSessionHandle(), "# Sess", xbSession():ActiveSessions(), "CARGO", oClient:GetCargo())
+
+   CHECKLOGIN
+
+   Debug("Action:", cAction, oClient:GetCargo())
+
+   DEFAULT cAction TO ""
+
+   cAction := Upper(cAction)
+
+   do case
+   case cAction == "SALIR"
+      WEB_TC_Logout()
+      Return
+
+   endcase
+
+   oClient:HTTPResponse:Content := BuildTimeClockPage(;
+                                       oClient:GetCargo("NAME"), ;
+                                       oClient:GetCargo("CLOCKIN"), ;
+                                       oClient:GetCargo("CLOCKOUT"), ;
+                                       oClient:GetCargo("EXCEPTIONS"))
+   Return
+
+
+
+
+//-----------------------------------------------------------------------------
+WEBPROC ChangePasswordForm() PATH TC
+   Static cTemplate
+
+   if cTemplate == NIL
+      TEXT INTO cTemplate TRIMMED
+      <html>
+      <head>
+        <title>ChangePassword</title>
+        <style>
+         td {font:normal 16px verdana; color:yellow; text-align:center;}
+         td.head   {font: bold 18px verdana; color:magenta; text-align:center; align:center; }
+         td.prompt {font: bold 12px verdana; color:yellow; text-align:right; }
+         td.field  {font: normal 14px verdana; color:white; text-align:left; text-transform:uppercase; padding:0px; background-color:#003366;}
+         td.footer {text-align:right; padding:0px; background-color:#003366; width:230px;}
+        </style>
+      </head>
+
+      <body bgcolor=black>
+        <table width=100% height=100%>
+          <tr><td align=center>
+
+          <table width=580 height=380 align=center style='background-color:#003366;'>
+            <tr><td valign=center>
+
+            <table align=center>
+              <tr><td class=head>Change Password<p><br><br></td></tr>
+
+                <table cellspacing=1 cellpadding=0 align=center>
+                  <form name='pwd' method='post' action='ChangePassword'>
+                    <input type=hidden name="_SID" value="<%sid%>">
+                    <tr><td class=prompt>Old Password:&nbsp;</td><td class=field><input type=password name='OLD'  maxlength=15 size=16></td></tr>
+                    <tr><td class=prompt>New Password:&nbsp;</td><td class=field><input type=password name='NEW1' maxlength=15 size=16></td></tr>
+                    <tr><td class=prompt>Confirm:&nbsp;</td><td class=field><input type=password name='NEW2' maxlength=15 size=16></td></tr>
+                    <tr><td colspan=2><hr></td></tr>
+                    <tr><td colspan=2 class=footer><input type=submit value='Save' width=100px style='width:80px; font:bold 12px verdana;'></td></tr>
+                  </form>
+                </table>
+            </table>
+            </td></tr>
+
+          </table>
+          </td></tr>
+        </table>
+        <script language='javascript'>document.pwd.OLD.focus();</script>
+      </body>
+      </html>
+      ENDTEXT
+   endif
+
+   oClient:HTTPResponse:Content := StrTran(cTemplate, "<%sid%>", oClient:GetSessionHandle(), 1, 1)
+
+   Return
+
+//-----------------------------------------------------------------------------
+WEBPROC ChangePassword() PATH TC
+   GETCARGO UID  AS nID
+   GETVAR   OLD  AS cPWD
+   GETVAR   NEW1 AS cNew1
+   GETVAR   NEW2 AS cNew2
+
+   CHECKLOGIN
+
+   if ! cNew1 == cNew2
+      FlashError( "The new password and confirmation do not match!" )
+      Return
+   endif
+
+   USE employee ALIAS emp INDEX employee SHARED NEW
+
+   if !(DbSeek(nID, .f.) .and. Upper(Trim(emp->password)) == Upper(Trim(cPWD)))
+      FlashError( "Invalid password!" )
+   elseif dbRLock()
+      emp->password := cNew1
+      FlashMessage( "Password changed...", "TimeClock?_SID=" + oClient:GetSessionHandle())
+   else
+      FlashError( "ERROR: Unable to obtain database record lock.<br>Try again..." )
+   endif
+
+   dbCLoseAll()
+   Return
+
+//-----------------------------------------------------------------------------
+WEBPROC BrowseTable( cBase64String ) PATH TC
+   Local cHtml
+
+   CHECKLOGIN
+
+   TEXT INTO cHtml TRIMMED
+      <html><head>
+      <link rel="stylesheet" type="text/css" href="/Style.css"></head>
+      <body bgcolor=black style=margin:0px;>
+   ENDTEXT
+
+   ThreadObject():HTTPResponse:Content := cHtml + DrawTableGrid( cBase64String ) + "</body></html>"
+
+   Return
+
+//-----------------------------------------------------------------------------
+STATIC FUNCTION DrawTableGrid( cBase64String, nMaxRows )
+   Local i, cHtml, cPrev, cNext, n
+   Local cTable, xTag, xTopScope, xBotScope, cHeading, aFields, bFilter, nFields, aParam
+   Local nRows    := 0
+   Local oClient  := ThreadObject()
+   Local oURL     := xbURI():New()
+   Local nDir     := iif(oClient:GetVar("DIR")==NIL, 1, Val(oClient:GetVar("DIR")))
+   Local nFromRec := iif(oClient:GetVar("POS")==NIL, 0, Val(oClient:GetVar("POS")))
+
+   DEFAULT nMaxRows TO 25
+
+   // decode the params from the base64 string
+   if !Empty( cBase64String )
+      aParam := &(xbBase64Decode( cBase64String ))
+   endif
+
+   // this would be so much simpler with SQL
+   cTable   := aParam[1]
+   xTag     := aParam[2]
+   xTopScope:= aParam[3]
+   xBotScope:= aParam[4]
+   cHeading := aParam[5]
+   aFields  := aParam[6]
+   bFilter  := aParam[7]
+
+   USE (cTable) INDEX (cTable) SHARED NEW
+   SET DELETED ON
+
+   if ! Empty(xTag)
+      OrdSetFocus(xTag)
+   endif
+
+   if xTopScope != NIL
+      dbSetScope(SCOPE_TOP, xTopScope)
+   endif
+
+   if xBotScope != NIL
+      dbSetScope(SCOPE_BOTTOM, xBotScope)
+   endif
+
+   if ValType(bFilter) == "B"
+      dbSetFilter( bFilter )
+   endif
+
+   if Empty(aFields)
+      nFields := FCount()
+      aFields := Array(nFields)
+      for i := 1 to nFields
+         aFields[i] := i
+      next
+   else
+      nFields := Len(aFields)
+   endif
+
+
+   oURL:Path("BrowseTable('" + cBase64String + "')")
+   oURL:SetVar(oClient:Parent:SessionTag, oClient:GetSessionHandle())
+
+   cHtml := "<table width=90% align=center><tr>"
+
+   if ! Empty(cHeading)
+      cHtml += "<th colspan=" + NTrim(nFields) + ">" + cHeading + "<br>&nbsp;</th></tr></tr>"
+   endif
+
+   // draw column headings
+   for i := 1 to nFields
+      cHtml += "<th>" + FieldName(aFields[i]) + "</th>"
+   next
+
+   cHtml += "</tr>"
+
+   if nFromRec == 0
+      dbGoTop()
+   else
+      dbGoTo(nFromRec)
+      if nDir < 0
+         // skip back nMaxRows
+         dbSkip(-nMaxRows)
+      endif
+      // skip back to see if we're at the top
+      // no sense of displaying "Prev Page" link if we're already at the top
+      dbSkip(-1)
+      if !Bof()
+         dbSkip()
+         oURL:SetVar("DIR", "-1")
+         oURL:SetVar("POS", NTrim(RecNo()))
+         cPrev := oURL:AsString()
+      endif
+   endif
+
+   // draw the table contents
+   n := 0
+   while !Eof() .and. ++nRows <= nMaxRows
+      if (++n % 2) == 0
+         cHtml += "<tr class=r0>"
+      else
+         cHtml += "<tr class=r1>"
+      endif
+      for i := 1 to nFields
+         cHtml += "<td>" + Var2Char(FieldGet( aFields[i] )) + "</td>"
+      next
+      cHtml += "</tr>"
+      dbSkip()
+   enddo
+
+   if !Eof()
+      // add page down link only if we're not at EOF
+      oURL:SetVar("DIR", "1")
+      oURL:SetVar("POS", NTrim(RecNo()))
+      cNext := oURL:AsString()
+   endif
+
+   // add hyperlinks for page up/down
+   cHtml += "<tr><th colspan=" + NTrim(nFields) +" style='text-align:right;'><br>" +;
+            iif(cPrev==Nil, "<font style=color:gray;>Prev Page</font>", "<a href=" + cPrev + ">Prev Page</a>") + ;
+            " | " +;
+            iif(cNext==Nil, "<font style=color:gray;>Next Page</font>", "<a href=" + cNext + ">Next Page</a>") +;
+            "</th></tr>" +;
+            "</table>"
+
+   dbCLoseAll()
+
+   Return cHtml
+
+//----------------------------------------------------------------------------------------------------
+STATIC FUNCTION LockRecord()
+   Local i := 0
+
+   for i := 1 to 10   // try for a max 5 sec
+      if dbRLock()
+         return .t.
+      endif
+      sleep( 50 )
+   next
+
+   dbCLoseAll()
+   Break( "Unable to obtain record lock!" )  // unable to lock record -- this will cause an error to be returned to the client
+   Return .f.
+
+//-----------------------------------------------------------------------------
+STATIC FUNCTION isLoggedIn()
+   if Empty(ThreadObject():GetCargo("UID"))
+      ThreadObject():CloseSession()
+      FlashError("You need to log in first...", "Login.htm")
+      Return .F.
+   endif
+   Return .T.
+
+//-----------------------------------------------------------------------------
+STATIC FUNCTION HaveSecurityPrivilege( nLevel )
+   DEFAULT nLevel TO SEC_ADMIN
+   if ThreadObject():GetCargo("SECURITY") >= nLevel
+      Return .T.
+   endif
+   FlashError("Sorry, you do not have access to this function!", "TimeClock?_SID=" + ThreadObject():GetSessionHandle())
+   Return .F.
+
+
+//-----------------------------------------------------------------------------
+STATIC FUNCTION BuildTimeClockPage( cName, cTimeIn, cTimeOut, cExceptions )
+   Static cTemplate
+   Local cMENU1, cMENU2, cMENU3, cMENU4   
+   Local cHtml
+
+DEFAULT cTimeIn     TO ""
+DEFAULT cTimeOut    TO ""
+DEFAULT cExceptions TO ""
+   
+Store '' to cMENU1, cMENU2, cMENU3, cMENU4
+
+/*if cTemplate == NIL*/
+
+	If fvACCESO(13) // modo gerencial
+		   
+		      TEXT INTO cMENU1 TRIMMED
+		      <html>
+		      <head>
+			<title>MrTienda WebServer</title>
+		      </head>
+
+			<body BGCOLOR="FFFFFF">
+			<BR>
+			<CENTER><B>MENU GERENCIAL</B></CENTER>
+			<TABLE  ALIGN="CENTER" width="75%" BORDER='0'>
+			<TR>
+			<B>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>CONSULTAS</B></FONT></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>REPORTES</B></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>PROCESOS</B></TD></TR>
+			</B>
+			<TR>
+			<td class="link"><a href=\TC\menuexisten.htm class="cold" title="">Existencias</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\menucortes.htm class="cold" title="">Cortes de Caja</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\mnuctapend.htm class="cold" title="">Cuentas Pendientes</a></td>
+			<TD></TD><td class="link"><a href=\TC\mensaje1.html class="cold" title="">Enviar Mensajes</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\menuprecio.html class="cold" title="">Lista de Precios</a></td>
+			<TD></TD>
+			<td class="link"><a href=\TC\ajusInv.htm class="cold" title="">Ajustar Inventario</a></td>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\edocta.html class="cold" title="">Estado de Cuenta Clientes</a></td>
+			<td class="link"><a href=Inflacion? class="cold" title="">Variaciones en Precios de Compra</a></td>
+			<br>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\seginv.html class="cold" title="">Seguimiento de Inventario</a></td>
+			<br>
+			<td class="link"><a href=\TC\asistencia.html class="cold" title="">Reporte de Asistencia</a></td>
+			<br>
+
+			<TR>
+			<td class="link"><a href=\index.htm class="cold" title="">Terminar</a></td>
+			<br>
+			</TR>
+
+			</TABLE>
+
+			  </body>
+
+		      </html>
+		      ENDTEXT
+	EndIf
+
+	If fvACCESO(14) // modo proveedor
+
+		      TEXT INTO cMENU2 TRIMMED
+		      <html>
+		      <head>
+			<title>MrTienda WebServer</title>
+		      </head>
+
+			<body BGCOLOR="FFFFFF">
+			
+			<BR>
+			<BR>
+			<CENTER><B>MENU PROVEEDOR</B></CENTER>
+			<BR>
+			<TABLE  ALIGN="CENTER" width="75%" BORDER='0'>
+			<TR>
+			<B>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>OPERACION</B></FONT></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>REPORTES</B></TD></TR>
+			</B>
+			<TR>
+			<td class="link"><a href=\TC\CotizaPedido.html class="cold" title="">Cotizar Pedidos de Clientes</a></td>
+			</TR>
+			<TR>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\index.htm class="cold" title="">Terminar</a></td>
+			<br>
+			</TR>
+
+			</TABLE>
+
+			  </body>
+
+		      </html>
+		      ENDTEXT
+
+	EndIf
+
+	If fvACCESO(15) // modo publico
+
+		      TEXT INTO cMENU3 TRIMMED
+		      <html>
+		      <head>
+			<title>MrTienda WebServer</title>
+		      </head>
+
+			<body BGCOLOR="FFFFFF">
+			<BR>
+			<BR>
+			<CENTER><B>MENU PUBLICO</B></CENTER>
+			<BR>
+			
+			<TABLE  ALIGN="CENTER" width="75%" BORDER='0'>
+			<TR>
+			<B>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>CONSULTAS</B></FONT></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>REPORTES</B></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>PROCESOS</B></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>SUCURSALES</B></TD></TR>
+			</B>
+			<TR>
+			<TD></TD><td class="link"><a href=\TC\mensaje1.html class="cold" title="">Enviar Mensajes</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\menuprecio.html class="cold" title="">Lista de Precios</a></td>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\edocta.html class="cold" title="">Estado de Cuenta Clientes</a></td>
+			<br>
+			<TR>
+			<td class="link"><a href=\TC\vercotizacion.html class="cold" title="">Consultar Cotizaciones</a></td>
+			<td class="link"><a href=\TC\TiendaVirtual.html class="cold" title="">Tienda Virtual</a></td>
+			<br>
+			</TR>
+			<TR>
+			</TR>
+			<TR>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\index.htm class="cold" title="">Terminar</a></td>
+			<br>
+			</TR>
+
+			</TABLE>
+
+			  </body>
+
+		      </html>
+		      ENDTEXT
+	EndIf
+
+	If fvACCESO(16) // Administracion de Sucursales
+
+		      TEXT INTO cMENU4 TRIMMED
+		      <html>
+		      <head>
+			<title>MrTienda WebServer</title>
+		      </head>
+
+			<body BGCOLOR="FFFFFF">
+			<BR>
+			<BR>
+			<CENTER><B>ADMINISTRACION DE SUCURSALES</B></CENTER>
+			<BR>
+			<TABLE  ALIGN="CENTER" width="75%" BORDER='0'>
+			<TR>
+			<B>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>EXPORTAR</B></FONT></TD>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>IMPORTAR</B></FONT></TD>
+			<TD BGCOLOR="#000070"> <font color = "#999999"><B>CONFIGURAR</B></FONT></TD>
+			</TR>
+			</B>
+			<TR>
+			<td class="link"><a href=\TC\ExpFtpCat? class="cold"       title="">Productos y Precios</a></td>
+			<td class="link"><a href=\TC\ImpFtpCat? class="cold"       title="">Productos y Precios</a></td>
+			<td class="link"><a href=\TC\DefFtpPar?.html class="cold" title="">Usuario FTP</a></td>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\IMPVTAS2.HTML class="cold"   title="">Ventas via FTP</a></td>
+			<td class="link"><a href=\TC\IMPVTAS3.HTML class="cold"   title="">Ventas via FTP</a></td>
+			</TR>
+
+			<TR>
+			<TD></TD>
+			<td class="link"><a href=\TC\IMPVTAS.html class="cold"   title="">Ventas Directamente</a></td>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\ExpOFERTA? class="cold"       title="">Ofertas Calendarizadas</a></td>
+			<td class="link"><a href=\TC\ImpOFERTA? class="cold"       title="">Ofertas Calendarizadas</a></td>
+			</TR>
+
+			<TR>
+			<td class="link"><a href=\TC\ExpRH? class="cold"             title="">Recursos Humanos</a></td>
+			<td class="link"><a href=\TC\ImpRH? class="cold"             title="">Recursos Humanos</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\ExpFtpCat? class="cold"       title="">Menu Touch Screen</a></td>
+			</TR>
+			<TR>
+			<td class="link"><a href=\TC\ExpFtpCat? class="cold"       title="">Productos Eliminados</a></td>
+			</TR>
+			
+			<TR>
+			<td class="link"><a href=\index.htm class="cold" title="">Terminar</a></td>
+			</TR>
+
+			</TABLE>
+
+			  </body>
+
+		      </html>
+		      ENDTEXT
+	EndIf
+
+	cHtml := cMENU1 + cMENU2 + cMENU3 + cMENU4
+
+/*EndIf*/
+
+Return cHtml
+
+
+*
+* EXISTENCIAS : POR DESCRIPCION
+*
+
+WEBPROC EXISTEN2() PATH TC
+
+   Local cDESC    := oClient:GetVar("DESC")
+
+If fvACCESO(1)
+
+   cDESC := Upper(Trim(cDESC))
+
+cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+   if FExists( cFileName )
+
+		aFILES := dARRAY({'PRODUCTO','CODIGOS','STOCKS'})
+		fVIDMAIN(.t., aFILES)
+
+		TEXT INTO cHtml TRIMMED
+			<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+			<TABLE><TABLE BORDER='5'>
+			<TR><TD BGCOLOR="FFCCFF">PLU</TD><TD BGCOLOR="FFCCFF">DESCRIPCION</TD><TD BGCOLOR="FFCCFF">EXISTENCIA</TD></TR>
+		ENDTEXT
+
+		If .not. EMPTY(cDESC)
+
+			PRODUCTO->( ordsetfocus( 4))
+			PRODUCTO->(DbGoTop())
+			Do While .not. PRODUCTO->(Eof())
+				If cDESC$UPPER(PRODUCTO->DES_PROD)
+
+					CODIGOS->( ordsetfocus( 1))
+					If CODIGOS->(DbSeek(PRODUCTO->COD_PROD))
+					
+						STOCKS->( ordsetfocus( 2))
+						If STOCKS->(DbSeek(PRODUCTO->COD_PROD + cCOD_MAIN_ALMA + CODIGOS->SIZE + CODIGOS->ATRIB ))
+							cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(STOCKS->EXISTE,'999,999,999.999') +'</TD></TR>'
+						EndIf
+					EndIf
+					
+				Endif
+				PRODUCTO->(DbSkip())
+			EndDo
+		EndIf
+
+		cHtml+='</TABLE>'
+		oClient:HTTPResponse:Content  := cHtml
+		
+		fVIDMAIN(.f., aFILES)
+
+   else
+      FlashError('** ERROR **')
+   endif
+Else
+	FlashError('** NO TIENE ACCESO **')
+Endif
+Return
+
+
+*
+* EXISTENCIAS POR PLU
+*
+WEBPROC Existen1() PATH TC
+Local cPLU     := oClient:GetVar("PLU")
+
+If fvACCESO(1)
+
+	cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+	if FExists( cFileName )
+
+	aFILES := dARRAY({'PRODUCTO','CODIGOS','STOCKS'})
+	fVIDMAIN(.t., aFILES)
+
+	TEXT INTO cHtml TRIMMED
+		<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+		<TABLE><TABLE BORDER='5'>
+		<TR><TD BGCOLOR="FFCCFF">PLU</TD><TD BGCOLOR="FFCCFF">DESCRIPCION</TD><TD BGCOLOR="FFCCFF">EXISTENCIA</TD></TR>
+	ENDTEXT
+
+	If .not. EMPTY(cPLU)
+
+		cCOD_PLU := Space(15-len(cPLU)) + cPLU
+		CODIGOS->( ordsetfocus( 2))
+		If CODIGOS->(DbSeek(cCOD_PLU))
+
+			PRODUCTO->( ordsetfocus( 1))
+			If PRODUCTO->(DbSeek(CODIGOS->COD_PROD))
+
+				STOCKS->( ordsetfocus( 2))
+				If STOCKS->(DbSeek(PRODUCTO->COD_PROD + cCOD_MAIN_ALMA + CODIGOS->SIZE + CODIGOS->ATRIB ))
+					cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(STOCKS->EXISTE,'999,999,999.999') +'</TD></TR>'
+				EndIf
+			EndIf
+		Else
+				cHtml += 'NO SE ENCONTRO CODIGO PLU : ' + cPLU+ '<br>'
+		EndIf
+
+	EndIf
+
+	cHtml+='</TABLE>'
+
+	oClient:HTTPResponse:Content  := cHtml
+
+	fVIDMAIN(.f., aFILES)
+	EndIf
+Else
+	FlashError('** NO TIENE ACCESO **')
+Endif
+
+Return
+
+
+*
+* REPORTE DE ASISTENCIAS
+*
+WEBPROC RepAsis() PATH TC
+
+Local cFECHA := oClient:GetVar('orderdate'), dFECHA
+Local cFILENAME := cDBFPATH + 'CLIENTES.DBF'
+
+If fvACCESO(8)
+
+	if FExists( cFileName ) .AND. .NOT. EMPTY(cFECHA)
+
+		dFECHA := CTOD(cFECHA)
+
+		aFILES := dARRAY({'PAREA','CHECK'})
+		fVIDMAIN(.t., aFILES)
+
+		TEXT INTO cHtml TRIMMED
+			<BR><B><FONT SIZE="12">REPORTE DE ASISTENCIAS</B><BR>
+		ENDTEXT
+		
+		cHTML+='<B><FONT SIZE="6">' +   cFECHA  +'</B><BR>'
+		
+		cHTML+="<TABLE><TABLE BORDER='5'>"
+		cHTML+='<TR><TD BGCOLOR="FFCCFF">EMPLEADO</TD><TD BGCOLOR="FFCCFF">FECHA ENTRADA</TD><TD BGCOLOR="FFCCFF">HORA</TD> <TD BGCOLOR="FFCCFF">FECHA SALIDA</TD> <TD BGCOLOR="FFCCFF">HORA</TD> <TD BGCOLOR="FFCCFF">TIEMPO</TD></TR>'
+
+		CHECK->( ordsetfocus( 3 ))
+		CHECK->(DbSetFilter( {||  CHECK->FECHA_IN == dFECHA  } ))
+		CHECK->(DbGoTop())
+		Do WHILE .not. CHECK->(Eof())
+
+			PAREA->( ordsetfocus( 2 ))
+			If PAREA->(DbSeek(CHECK->COD_CLERK))
+					
+				nMINUTOS := fdMINS(CHECK->FECHA_OUT, CHECK->HORA_OUT,CHECK->FECHA_IN, CHECK->HORA_IN)
+				cHtml+=  '<TR><TD>'+PAREA->DES_EMPLEA+'</TD><TD>'+DTOC(CHECK->FECHA_IN)+'</TD><TD>'+ CHECK->HORA_IN +'</TD><TD>'+  DTOC(CHECK->FECHA_OUT) +'</TD>'+ '<TD>'+  CHECK->HORA_OUT +'</TD>'+ '<TD ALIGN=RIGHT>'+  fdHORAS(nMINUTOS)  +'</TD></TR>'
+				
+			Endif
+
+			CHECK->(DbSkip())
+		EndDo
+
+		cHtml+='</TABLE>'
+
+		dbselectarea('CHECK')
+		Set Filter TO
+		CHECK->(DbGoTop())
+		
+		fVIDMAIN(.f., aFILES)
+		oClient:HTTPResponse:Content  := cHtml
+		
+	Else
+	      FlashError('** ERROR **')
+	EndIf
+Else
+      FlashError('** NO TIENE ACCESO **')
+Endif
+
+Return
+
+
+Static Function fdMINS(dFECHA_ACT, cHORA_ACT, dFECHA_INI, cHORA_INI)
+Local nMINUTOS := 0, nMIN_DIA, nMIN_ACT, nHRAS, nMINS
+
+If .not. EMPTY(dFECHA_ACT) .and. .not. EMPTY(dFECHA_INI)
+	nMIN_DIA := (dFECHA_ACT - dFECHA_INI) * 24 * 60 // DIFERENCIA DE DIAS
+	nMIN_INI := Val(Substr(cHORA_INI,1,2))*60 + Val(Substr(cHORA_INI,4,2))
+	nMIN_ACT := Val(Substr(cHORA_ACT,1,2))*60 + Val(Substr(cHORA_ACT,4,2))
+
+	nMINUTOS := nMIN_DIA - nMIN_INI + nMIN_ACT
+
+Endif
+Return nMINUTOS
+
+
+Static Function fdHORAS(nMINUTOS)
+Local cRET_VAL := ''
+
+nHRAS    := Int(nMINUTOS / 60)
+nMINS    := Int((nMINUTOS/60-Int(nMINUTOS/60))*60)
+If (nMINUTOS/60-Int(nMINUTOS/60))*60 - nMINS > 0
+	nMINS++
+Endif
+cRET_VAL := If(nHRAS==0,space(7),Str(nHRAS,4)+' hr') + ' ' + Str(nMINS, 2) +' min'
+
+Return cRET_VAL
+
+Function fvACCESO(nACCESO)
+Return If(Substr(ThreadObject():GetCargo("ACCESO_3"), nACCESO,1)=='1',.T.,.F.)
+
+
+
+*
+* CONSULTAR ESTADO DE CUENTA
+*
+
+WEBPROC EdoCta1() PATH TC
+Local cCOD_UNICO := oClient:GetVar("COD_UNICO")
+Local nTOTAL1 := 0, nTOTAL2 := 0, nTOTAL3 := 0
+cFILENAME := cDBFPATH + 'CLIENTES.DBF'
+
+If fvACCESO(6)
+
+	if FExists( cFileName ) .AND. .NOT. EMPTY(cCOD_UNICO)
+
+			aFILES := dARRAY({'CLIENTES','CXC','CXC_MOVS'})
+			fVIDMAIN(.t., aFILES)
+
+			CLIENTES->( ordsetfocus( 6))
+			If CLIENTES->(DbSeek(cCOD_UNICO))
+
+				TEXT INTO cHtml TRIMMED
+					<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+				ENDTEXT
+				
+				cHTML+='<B><FONT SIZE="8">' + CLIENTES->CTE_NOMBRE+'</B><BR>'
+				cHTML+=Alltrim(CLIENTES->CTE_DIREC1)+' ' + Alltrim(CLIENTES->CTE_DIREC2)+ ' ' + Alltrim(CLIENTES->CTE_DIREC3)+ '<BR>'
+
+				cHTML+="<TABLE><TABLE BORDER='5'>"
+				cHTML+='<TR><TD BGCOLOR="FFCCFF">FECHA</TD><TD BGCOLOR="FFCCFF">TICKET</TD><TD BGCOLOR="FFCCFF">CARGOS</TD> <TD BGCOLOR="FFCCFF">ABONOS</TD> <TD BGCOLOR="FFCCFF">SALDO</TD> </TR>'
+
+				CXC->( ordsetfocus( 3))
+				CXC->(DbSeek(CLIENTES->COD_CTE))
+				Do While .not. CXC->(Eof()) .and. CXC->COD_CTE == CLIENTES->COD_CTE
+					If CXC->SALDO > 0
+						cHtml+='<TR><TD>'+dtoc(CXC->FECHA)+'</TD><TD>'+CXC->FOL_VENTA+'</TD><TD ALIGN=RIGHT>'+ Trans(CXC->CARGOS,'99,999,999.99') +'</TD>'+ '<TD ALIGN=RIGHT>'+ Trans(CXC->ABONOS,'99,999,999.99') +'</TD>'+ '<TD ALIGN=RIGHT>'+ Trans(CXC->SALDO,'99,999,999.99') +'</TD></TR>'
+						nTOTAL1+=CXC->CARGOS
+						nTOTAL2+=CXC->ABONOS
+						nTOTAL3+=CXC->SALDO
+					Endif
+					CXC->(DbSkip())
+				EndDo
+				cHtml+='<TR><TD>'+'TOTALES:'+'</TD><TD>'+''+'</TD><TD ALIGN=RIGHT>'+ Trans(nTOTAL1,'99,999,999.99') +'</TD>'+ '<TD ALIGN=RIGHT>'+ Trans(nTOTAL2,'99,999,999.99') +'</TD>'+ '<TD ALIGN=RIGHT>'+ Trans(nTOTAL3,'99,999,999.99') +'</TD></TR>'
+				cHtml+='</TABLE>'
+
+				oClient:HTTPResponse:Content  := cHtml
+			Else
+				FlashError('** NO SE ENCONTRO CLIENTE !!! **')
+			EndIf
+			fVIDMAIN(.f., aFILES)
+
+	else
+	      FlashError('** ERROR **')
+	EndIf
+Else
+      FlashError('** NO TIENE ACCESO **')
+Endif
+Return
+
+
+Function fFUERA_HORARIO()
+Local lRET_VAL := .T.
+Local dFECHA := DATE()
+Local cHORA  := Substr(TIME(),1,5)
+Local aDIAS := {'DOM','LUN','MAR','MIE','JUE','VIE','SAB'}
+
+If PAREA->LIMITAR // LIMITACION DE HORARIO
+
+	cCAMPO := aDIAS[dow(dFECHA)]
+	If PAREA->&cCAMPO // aplica en el dia de la semana
+
+		If dFECHA >= PAREA->FECHAI .and. dFECHA <= PAREA->FECHAF
+
+			*
+			* REVISION DE HORARIO
+			*
+
+			lHORARIO := .f.
+
+			*
+			* NO ES FECHA INICIAL NI FECHA FINAL : DENTRO DEL PERIODO
+			*
+			If dFECHA <> PAREA->FECHAI .and. dFECHA <> PAREA->FECHAF
+				If cHORA>=PAREA->HORAI .and. cHORA<=PAREA->HORAF
+					lHORARIO := .t.
+				EndIf
+			Endif
+
+			*
+			* IGUAL A FECHA DE INICIO PERO DIFERENTE A LA FECHA FINAL
+			*
+			If dFECHA == PAREA->FECHAI .and. dFECHA <> PAREA->FECHAF
+				If cHORA>=PAREA->HORAI .and. cHORA<=PAREA->HORAF
+					lHORARIO := .t.
+				Endif
+			Endif
+
+			*
+			* DIFENTE A FECHA DE INICIO PERO IGUAL A FECHA FINAL
+			*
+			If dFECHA <> PAREA->FECHAI .and. dFECHA == PAREA->FECHAF
+				If cHORA>=PAREA->HORAI .and. cHORA<=PAREA->HORAF
+					lHORARIO := .t.
+				Endif
+			Endif
+
+			*
+			* IGUAL A FECHA DE INICIO Y A FECHA FINAL
+			*
+			If dFECHA == PAREA->FECHAI .and. dFECHA == PAREA->FECHAF
+				If cHORA>=PAREA->HORAI .and. cHORA<=PAREA->HORAF
+					lHORARIO := .t.
+				Endif
+			Endif
+
+			If lHORARIO
+				lRET_VAL := .f.
+			Else
+				lRET_VAL := .T.
+			Endif
+
+		Endif
+	EndIf
+Else
+	lRET_VAL := .f.
+EndIf
+Return lRET_VAL
+
+
+
+*
+* PRECIOS POR PLU
+*
+WEBPROC PRECIOS1() PATH TC
+
+Local cPLU     := oClient:GetVar("PLU")
+
+If fvACCESO(5)
+
+	cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+	   if FExists( cFileName )
+
+			aFILES := dARRAY({'PRODUCTO','CODIGOS','PRECIOS','ESCALAS'})
+			fVIDMAIN(.t., aFILES)
+
+			TEXT INTO cHtml TRIMMED
+				<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+				<TABLE><TABLE BORDER='5'>
+				<TR><TD BGCOLOR="FFCCFF">PLU</TD><TD BGCOLOR="FFCCFF">DESCRIPCION</TD><TD BGCOLOR="FFCCFF">PRECIO</TD></TR>
+			ENDTEXT
+
+			If .not. EMPTY(cPLU)
+
+				cCOD_PLU := Space(15-len(cPLU)) + cPLU
+				CODIGOS->( ordsetfocus( 2))
+				If CODIGOS->(DbSeek(cCOD_PLU))
+
+					PRODUCTO->( ordsetfocus( 1))
+					If PRODUCTO->(DbSeek(CODIGOS->COD_PROD))
+
+						PRECIOS->( ordsetfocus(1))
+						If PRECIOS->(DbSeek(PRODUCTO->COD_PROD))
+							cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(PRECIOS->ACTIVO,'$9999,999.99') +'</TD></TR>'
+						EndIf
+					EndIf
+				Else
+						cHtml += 'NO SE ENCONTRO CODIGO PLU : ' + cPLU+ '<br>'
+				EndIf
+
+			EndIf
+
+
+			cHtml+='</TABLE>'
+
+			oClient:HTTPResponse:Content  := cHtml
+
+			fVIDMAIN(.f., aFILES)
+
+	   else
+	      FlashError('** ERROR **')
+	   endif
+Else
+      FlashError('** NO TIENE ACCESO **')
+Endif
+
+Return
+
+
+
+
+*
+* PRECIOS : POR DESCRIPCION
+*
+WEBPROC PRECIOS2() PATH TC
+
+   Local cDESC    := oClient:GetVar("DESC")
+
+If fvACCESO(5)
+
+   cDESC := Upper(Trim(cDESC))
+
+   cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+   if FExists( cFileName )
+
+		aFILES := dARRAY({'PRODUCTO','CODIGOS','PRECIOS','ESCALAS'})
+		fVIDMAIN(.t., aFILES)
+
+		TEXT INTO cHtml TRIMMED
+			<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+			<TABLE><TABLE BORDER='5'>
+			<TR><TD BGCOLOR="FFCCFF">PLU</TD><TD BGCOLOR="FFCCFF">DESCRIPCION</TD><TD BGCOLOR="FFCCFF">PRECIO</TD></TR>
+		ENDTEXT
+
+		If .not. EMPTY(cDESC)
+
+			PRODUCTO->( ordsetfocus( 4))
+			PRODUCTO->(DbGoTop())
+			Do While .not. PRODUCTO->(Eof())
+				If cDESC$UPPER(PRODUCTO->DES_PROD)
+
+					CODIGOS->( ordsetfocus( 1))
+					If CODIGOS->(DbSeek(PRODUCTO->COD_PROD))
+
+						PRECIOS->( ordsetfocus( 1))
+						If PRECIOS->(DbSeek(PRODUCTO->COD_PROD))
+					   	cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(PRECIOS->ACTIVO,'999,999,999.999') +'</TD></TR>'
+						EndIf
+					EndIf
+				Endif
+				PRODUCTO->(DbSkip())
+			EndDo
+		EndIf
+
+		cHtml+='</TABLE>'
+
+		oClient:HTTPResponse:Content  := cHtml
+	
+		fVIDMAIN(.f., aFILES)
+
+   else
+      FlashError('** ERROR **')
+   endif
+Else
+      FlashError('** NO TIENE ACCESO **')
+Endif
+
+   Return
+
+
+
+
+*
+* PRECIOS POR FAMILIA
+*
+WEBPROC PRECIOS3() PATH TC
+
+	cFILENAME := cDBFPATH + 'FAMILIAS.DBF'
+
+If fvACCESO(5)
+
+   if FExists( cFileName )
+
+		aFILES := dARRAY({'FAMILIAS'})
+
+		cHTML2 := ''
+		fVIDMAIN(.t., aFILES)
+		FAMILIAS->(DbGoTop())
+		Do While .not. FAMILIAS->(Eof())
+			cHTML2+="<OPTION VALUE="+ALLTRIM(FAMILIAS->COD_FAMILI)+'>'+Alltrim(FAMILIAS->CONCEPTO)
+			FAMILIAS->(DbSkip())
+		EndDo
+
+		fVIDMAIN(.f., aFILES)
+
+		TEXT INTO cHtml TRIMMED
+		    <form name='login' method='post' action='Precios4'>
+			<SELECT NAME="familia">
+		ENDTEXT
+
+		cHtml+=cHTML2
+		cHTML+='</SELECT>'
+		cHTML+="<tr><td colspan=2 class=footer><input type=submit value='buscar' width=250px style='width:80px; font:bold 12px verdana;'></td></tr>"
+		cHTML+='</form>'
+
+      oClient:HTTPResponse:Content  := cHtml
+
+	EndIf
+
+Else
+      FlashError('** NO TIENE ACCESO **')
+Endif
+
+Return NIL
+
+
+*
+* RESULTADOS
+*
+WEBPROC PRECIOS4() PATH TC
+Local cHTML := ''
+   Local cCOD_FAMILI := oClient:GetVar("familia")
+	Local cCOD_ALMA := cCOD_MAIN_ALMA
+
+	cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+   if FExists( cFileName ) .AND. .NOT. EMPTY(cCOD_FAMILI)
+
+		aFILES := dARRAY({'PRODUCTO','CODIGOS','ESCALAS','PRECIOS','FAMILIAS','SIZE','ATRIB'})
+		fVIDMAIN(.t., aFILES)
+
+		FAMILIAS->( ordsetfocus( 1))
+		FAMILIAS->(DbSeek(cCOD_FAMILI))
+
+		TEXT INTO cHtml TRIMMED
+			<BR><B><FONT SIZE="12">RESULTADOS :</B><BR>
+			<TABLE><TABLE BORDER='5'>
+			<TR><TD BGCOLOR="FFCCFF">PLU</TD><TD BGCOLOR="FFCCFF">DESCRIPCION</TD><TD BGCOLOR="FFCCFF">PRECIO</TD></TR>
+		ENDTEXT
+
+		PRODUCTO->( ordsetfocus( 7))
+		PRODUCTO->(DbSeek(cCOD_FAMILI))
+		Do While .not. PRODUCTO->(Eof()) .and. cCOD_FAMILI == PRODUCTO->COD_FAMILI
+
+			CODIGOS->( ordsetfocus( 1))
+			If CODIGOS->(DbSeek(PRODUCTO->COD_PROD))
+
+				/*
+				cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(0,'$999,999.99') +'</TD></TR>'
+				*/
+
+				PRECIOS->( ordsetfocus(1))
+				If PRECIOS->(DbSeek(PRODUCTO->COD_PROD))
+					cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(PRECIOS->ACTIVO,'$999,999.99') +'</TD></TR>'
+				EndIf
+				
+			EndIf
+			
+			PRODUCTO->(DbSkip())
+		EndDo
+
+		cHtml+='</TABLE>'
+
+		cHTML+= FAMILIAS->CONCEPTO+'<BR>'
+
+		oClient:HTTPResponse:Content  := cHtml
+		fVIDMAIN(.f., aFILES)
+
+   else
+      FlashError('** ERROR **')
+   endif
+
+RETURN NIL
+
+
+
+
+*
+* AJUSTE DE INVENTARIO
+*
+WEBPROC AjusteInv1() PATH TC
+Local cPLU      := oClient:GetVar("PLU")
+Local cFILENAME, aFILES, cHTML := ''
+Local nFISICO := 0
+Local cCOD_PLU, lFOUND := .F.
+
+If fvACCESO(9)
+
+	cFILENAME := cDBFPATH + 'PRODUCTO.DBF'
+
+	if FExists( cFileName )
+
+
+	If .not. EMPTY(cPLU)
+	
+		aFILES := dARRAY({'PRODUCTO','CODIGOS','STOCKS'})
+		fVIDMAIN(.t., aFILES)
+
+		cCOD_PLU := Space(15-len(cPLU)) + cPLU
+		CODIGOS->( ordsetfocus( 2))
+		If CODIGOS->(DbSeek(cCOD_PLU))
+
+			PRODUCTO->( ordsetfocus( 1))
+			If PRODUCTO->(DbSeek(CODIGOS->COD_PROD))
+
+				STOCKS->( ordsetfocus( 2))
+				If STOCKS->(DbSeek(PRODUCTO->COD_PROD + cCOD_MAIN_ALMA + CODIGOS->SIZE + CODIGOS->ATRIB))
+				
+					lFOUND := .T.
+				
+					oClient:SetCargo("PLU", cCOD_PLU)
+				
+					TEXT INTO cHtml TRIMMED
+						<BR><CENTER><B><H4>AJUSTE DE INVENTARIO :</B></H4><BR></CENTER>
+						<TABLE  ALIGN="CENTER" width="75%" BORDER='0'>
+						<TR><TD BGCOLOR="#000070"><font color = "#999999"><B>PLU</B></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>DESCRIPCION</B></TD><TD BGCOLOR="#000070"><font color = "#999999"><B>EXISTENCIA</B></TD></TR>
+					ENDTEXT
+
+					cHtml+='<TR><TD>'+CODIGOS->COD_PLU+'</TD><TD>'+PRODUCTO->DES_PROD+'</TD><TD>'+ Trans(STOCKS->EXISTE,'999,999,999.999') +'</TD></TR>'
+					
+				EndIf
+			EndIf
+		Else
+			cHtml += '<BR><BR><CENTER><H2>NO SE ENCONTRO CODIGO PLU : ' + cPLU+ '<br></H2></CENTER>'
+		EndIf
+		
+		fVIDMAIN(.f., aFILES)
+		
+
+	EndIf
+
+	cHtml+='</TABLE>'
+	cHTML+= '<BR><BR>'
+
+	If lFOUND
+		cHtml+="<form name='login' method='post' action='AjusteInv2'>"
+		cHtml+="<tr><td class=prompt>FISICO:&nbsp;</td><td class=field><input type=text id = 'miplu' name='FISICO' maxlength=15 size=16></td></tr>"
+		cHtml+="<tr><td colspan=2 class=footer><input type=submit value='Ajustar' width=250px style='width:80px; font:bold 12px verdana;'></td></tr>"
+		cHtml+="</form>"
+
+		cHTML+= '<BR><BR>'
+		cHTML+= '<H3><td class="link"><a =\TC\ajusinv.htm class="cold" title="">Regresar</a></td></H3>'
+		cHTML+= "<script language='javascript'>document.login.miplu.focus();</script>"
+	Else
+	/*
+		cHTML+= '<BR><BR>'
+		cHTML+= '<H3><td class="link"><a href=\TC\ajusinv.htm class="cold" title="" ID = "miplu" >Continuar</a></td></H3>'
+	*/
+		oClient:SendFile( oClient:Parent:RootDir + "\TC\ajusinv.htm" )
+	EndIf
+
+	oClient:HTTPResponse:Content  := cHtml
+
+	EndIf
+Else
+	FlashError('** NO TIENE ACCESO **')
+Endif
+
+Return
+
+
+WEBPROC AjusteInv2() PATH TC
+Local cFISICO := oClient:GetVar("FISICO")
+Local cPLU := Alltrim(ThreadObject():GetCargo("PLU")) // OJO IMPORTANTE !!!!
+Local dFECHA, nAJUSTE, nFISICO
+Local aFILES := dARRAY({'PRODUCTO','CODIGOS','STOCKS'}) // OJO ARCHIVOS SE MANEJAN LOCALES EN CADA FUNCION !!
+
+If .not. empty(cFISICO) .and. .not. EMPTY(cPLU)
+
+	cCOD_PLU := Space(15-len(cPLU)) + cPLU
+
+	fVIDMAIN(.t., aFILES)
+
+	nFISICO := VAL(cFISICO)
+	
+	CODIGOS->( ordsetfocus( 2))
+	If CODIGOS->(DbSeek(cCOD_PLU))
+
+		PRODUCTO->( ordsetfocus( 1))
+		If PRODUCTO->(DbSeek(CODIGOS->COD_PROD))
+
+			STOCKS->( ordsetfocus( 2))
+			If STOCKS->(DbSeek(PRODUCTO->COD_PROD + cCOD_MAIN_ALMA + CODIGOS->SIZE + CODIGOS->ATRIB))
+			
+				nAJUSTE := nFISICO - STOCKS->EXISTE
+
+				*
+				* Actualizar Existencia
+				*
+				If nAJUSTE <> 0
+
+					dFECHA := DATE()
+					fMOV_DET(dFECHA)               // ABRIR MOV_DET DEL DIA
+
+					If STOCKS->(RLock())
+						Replace STOCKS->EXISTE with nFISICO
+						STOCKS->(DbUnLock())
+					EndIf
+
+					*
+					* Actualiza Ajuste de Articulo : MOV_DET
+					*
+					
+					If MOV_DET->(RLock())
+						MOV_DET->(DbAppend())
+						Replace MOV_DET->FOLIO     with 'W'+StrZero(Day(DATE()),2)+ StrZero(month(DATE()),2) + Substr(StrZero(Year(DATE()),4),-2),;
+						MOV_DET->COD_ALMA  with cCOD_MAIN_ALMA,;
+						MOV_DET->TIPO_MOV  with '1',;
+						MOV_DET->COD_PROD  with CODIGOS->COD_PROD,;
+						MOV_DET->ATRIB     with CODIGOS->ATRIB,;
+						MOV_DET->SIZE      with CODIGOS->SIZE,;
+						MOV_DET->CANTIDAD  with nAJUSTE,;
+						MOV_DET->PRECIO    with PRODUCTO->COSTO,;
+						MOV_DET->COSTO     with PRODUCTO->COSTO,;
+						MOV_DET->HORA       with SUBSTR(TIME(),1,5),;
+						MOV_DET->EXISTENCIA with nFISICO
+
+						MOV_DET->(DbUnLock())
+					Endif
+
+					If CODIGOS->SIZE <> '00' .and. CODIGOS->ATRIB <> '00'
+						*
+						* MATRIZ CONSOLIDADA : ACTUALIZA EXISTENCIAS
+						*
+						STOCKS->( ordsetfocus( 2 ))
+						If STOCKS->(DbSeek(PRODUCTO->COD_PROD + cCOD_MAIN_ALMA + '00' + '00' ))
+							If STOCKS->(RLock())
+								Replace STOCKS->EXISTE with STOCKS->EXISTE + nAJUSTE
+								STOCKS->(DbUnLock())
+							EndIf
+						EndIf
+
+					EndIf
+					
+					MOV_DET->( DbCloseArea() )
+				
+				EndIf
+
+			EndIf
+		EndIf
+	EndIf
+	fVIDMAIN(.f., aFILES)
+	
+EndIf
+
+oClient:SendFile( oClient:Parent:RootDir + "\TC\ajusinv.htm" )
+
+Return NIL
+
+WEBPROC mitono() PATH TC
+TONE(300,3)
+return NIL

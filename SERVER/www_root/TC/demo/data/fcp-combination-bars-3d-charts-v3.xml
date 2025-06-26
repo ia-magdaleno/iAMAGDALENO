@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="ffebb5" floor_color="ffebb5" common_calibrationYaxis="0" showAnchor="1" type_animation="2" />
+	<header text="Field ROP Data" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="15" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title_bar="Points" title_line="Points" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+
+	<abscissa_data>
+		<data value="16 ft/hr Baseline" />
+		<data value="13.5 ft/hr Baseline" />
+		<data value="4.4 ft/hr Baseline" />
+		<data value="20 ft/hr Baseline" />
+	</abscissa_data>
+
+	<bars view_value="0" width="8" thickness="20" space="7" alpha="100" pieces_grow_bar="40">
+		<categorie name="16 ft/hr Baseline">
+			<subcategorie name="Rop Baseline" value="18" color="5975ad" />
+			<subcategorie name="Rop with Additive" value="27" color="4a8a5a" />
+		</categorie>
+		<categorie name="16 ft/hr Baseline">
+			<subcategorie name="Rop Baseline" value="14" color="5975ad" />
+			<subcategorie name="Rop with Additive" value="23" color="4a8a5a" />
+		</categorie>
+		<categorie name="16 ft/hr Baseline">
+			<subcategorie name="Rop Baseline" value="3" color="5975ad" />
+			<subcategorie name="Rop with Additive" value="16" color="4a8a5a" />
+		</categorie>
+		<categorie name="16 ft/hr Baseline">
+			<subcategorie name="Rop Baseline" value="35" color="5975ad" />
+		</categorie>
+
+	</bars>
+
+	<lines>
+		<ordinate_data seriesName="Rop water-base" color="2e487c" alpha="100" size="4">
+			<y value="85" />
+			<y value="38" />
+			<y value="-50" />
+			<y value="53" />
+		</ordinate_data>
+	</lines>
+</graph>

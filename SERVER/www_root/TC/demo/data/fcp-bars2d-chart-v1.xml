@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="v" />
+	<header text="Republic of China's Trade with Columbia 2003-2005" font="Verdana" color="000000" size="14" />
+	<subheader text="Unit: US($) Million" font="Verdana" color="7F7F7F" size="12" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="300" grid_height="250" grid_color="000000" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="F8F8F8" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="20" space="1.5" alpha="90" view_double_bar="1" color_double_bar="ffffff" pieces_grow_bar="40" />
+	<data>
+		<categorie name="2003">
+			<subcategorie name="Exports" value="58" color="F671AD" />
+			<subcategorie name="Imports" value="128.5" color="FFEA75" />
+			<subcategorie name="Total" value="187.5" color="6BC7E9" />
+		</categorie>
+		<categorie name="2004">
+			<subcategorie name="Exports" value="167.1" color="F671AD" />
+			<subcategorie name="Imports" value="83.2" color="FFEA75" />
+			<subcategorie name="Total" value="250.4" color="6BC7E9" />
+		</categorie>
+		<categorie name="2005">
+			<subcategorie name="Exports" value="184.0" color="F671AD" />
+			<subcategorie name="Imports" value="99.6" color="FFEA75" />
+			<subcategorie name="Total" value="283.6" color="6BC7E9" />
+		</categorie>
+	</data>
+</graph>

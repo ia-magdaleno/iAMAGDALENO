@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="0" showAnchor="1" type_animation="1" />
+	<header text="The San Jose MSA's High-Tech Job Growth " font="Verdana" color="336699" size="15" />
+	<subheader text="Rates Turned Negative in 1998" font="Verdana" color="336699" size="15" />
+	<legend font="Verdana" color="336699" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="eefcfd" font_size="10" />
+	<Xheaders rotate="90" color="336699" size="10" title="NA" title_color="336699" />
+	<Yheaders color="336699" size="10" title_bar="High-Tech Employment Growth (Persent)" title_line="%" title_rotate="90" title_color="336699" />
+	<grid grid_width="500" grid_height="175" grid_color="336699" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="ebfbff" border_color="46a8ae" border_thickness="1" />
+
+	<abscissa_data>
+		<data value="Employment" />
+		<data value="Manufacturing" />
+		<data value="Durable Goods" />
+		<data value="Computers" />
+		<data value="Electronic Equipment*"/>
+		<data value="Instruments" />
+	</abscissa_data>
+
+	<bars view_value="0" width="20" space="0" alpha="100" view_double_bar="0" color_double_bar="666666" pieces_grow_bar="40">
+		<categorie name="Employment">
+			<subcategorie name="1996" value="4.8" color="99ccff" />
+			<subcategorie name="1997" value="5.98" color="6699ff" />
+			<subcategorie name="1998" value="0.78" color="003399" />
+		</categorie>
+		<categorie name="Manufacturing">
+			<subcategorie name="1996" value="2.7" color="99ccff" />
+			<subcategorie name="1997" value="7.8" color="6699ff" />
+			<subcategorie name="1998" value="-3.7" color="003399" />
+		</categorie>
+		<categorie name="Durable Goods">
+			<subcategorie name="1996" value="2.9" color="99ccff" />
+			<subcategorie name="1997" value="7.98" color="6699ff" />
+			<subcategorie name="1998" value="-3.99" color="003399" />
+		</categorie>
+		<categorie name="Computers">
+			<subcategorie name="1996" value="5.8" color="99ccff" />
+			<subcategorie name="1997" value="6.1" color="6699ff" />
+			<subcategorie name="1998" value="-1.2" color="003399" />
+		</categorie>
+		<categorie name="Electronic Equipment*">
+			<subcategorie name="1996" value="2.8" color="99ccff" />
+			<subcategorie name="1997" value="8.7" color="6699ff" />
+			<subcategorie name="1998" value="-4.3" color="003399" />
+		</categorie>
+		<categorie name="Instruments">
+			<subcategorie name="1996" value="5.3" color="99ccff" />
+			<subcategorie name="1997" value="6.2" color="6699ff" />
+		</categorie>
+		
+	</bars>
+
+	<lines>
+		<ordinate_data seriesName="under 1996" color="f2f2f2" alpha="100" size="3">
+			<y value="21.5" />
+			<y value="10" />
+			<y value="60" />
+			<y value="30" />
+			<y value="27" />
+			<y value="35" />
+		</ordinate_data>
+		
+	</lines>
+</graph>

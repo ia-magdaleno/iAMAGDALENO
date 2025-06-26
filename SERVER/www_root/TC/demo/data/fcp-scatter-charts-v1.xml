@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" showAnchor="1" showBubble="0" Bubble_gradient="1">
+		<header text="Customized response-vs.-time scatter chart" font="Verdana" color="000000" size="18" />
+		<subheader text="Figure 5" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="EAEAEA" font_size="10" />
+		<Xheaders show_calibration="1" rotate="90" color="000000" size="10" title="Relative Time into Test (Min)" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Relative Time (MSec)" title_rotate="90" title_color="000000" />
+		<grid showX="1" showY="1" persent_stepY_from_stepX="175" xAxisLines="10" yAxisLines="15" xAxisMinValue="10" xAxisMaxValue="150" yAxisMinValue="0" yAxisMaxValue="5000" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="20" grid_thickness="1" bg_color="F9F9F9" bg_alpha="100" alternate_bg_color="F9F9F9" border_color="000000" border_thickness="1" />
+	</general_settings>
+
+	<data seriesName="Data1" color="FF0080" alpha="0" size="3.5">
+		<value x="10" y=" " />
+		<value x="20" y="2500" />
+		<value x="25" y="2000" />
+		<value x="30" y="" />
+		<value x="41" y="1000" />
+		<value x="47" y="1282" />
+		<value x="50" y="1365" />
+		<value x="55" y="1433" />
+		<value x="65" y="1559" />
+		<value x="70" y="1823" />
+		<value x="85" y="1867" />
+		<value x="99.1" y="2198" />
+		<value x="103" y="" />
+		<value x="110" y="" />
+		<value x="115" y="3300" />
+		<value x="120" y="2264" />
+		<value x="125" y="2282" />
+		<value x="130" y="365" />
+		<value x="133" y="2433" />
+		<value x="140" y="2559" />
+		<value x="142" y="2823" />
+		<value x="147" y="2867" />
+		<value x="149" y="2867" />
+		<value x="150" y="" />
+	</data>
+
+	<data seriesName="Data2" color="FF8040" alpha="0" size="3.5">
+		<value x="10" y="189 " />
+		<value x="20" y="208" />
+		<value x="25" y="210" />
+		<value x="30" y="263" />
+		<value x="41" y="1000" />
+		<value x="47" y="888" />
+		<value x="50" y="1365" />
+		<value x="55" y="1000" />
+		<value x="65" y="1559" />
+		<value x="70" y="2750" />
+		<value x="85" y="3017" />
+		<value x="99.1" y="3451" />
+		<value x="103" y="3918" />
+		<value x="110" y="2532" />
+		<value x="115" y="3565" />
+		<value x="120" y="2353" />
+		<value x="125" y="1356" />
+		<value x="130" y="2534" />
+		<value x="133" y="3321" />
+		<value x="140" y="22" />
+		<value x="142" y="1353" />
+		<value x="147" y="1092" />
+		<value x="149" y="522" />
+		<value x="150" y="" />
+	</data>
+</graph>

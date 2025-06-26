@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFF8F1" showAnchor="0" showArea="1" type_animation="2">
+		<header text="Quarterly Sales Graph" font="Verdana" color="000000" size="18" />
+		<subheader text="Category: Books & Magazines" font="Verdana" color="000000" size="14" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="Period" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Number of sales" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="175" grid_width="550" grid_height="250" grid_color="FBB768" grid_alpha="40" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="ffffff" border_color="000000" border_thickness="1" />
+	</general_settings>
+	<abscissa_data>
+		<x value="Q1 2000" />
+		<x value="Q2 2000" />
+		<x value="Q3 2000" />
+		<x value="Q4 2000" />
+		<x value="Q1 2001" />
+		<x value="Q2 2001" />
+		<x value="Q3 2001" />
+		<x value="Q4 2001" />
+		<x value="Q1 2002" />
+		<x value="Q2 2002" />
+		<x value="Q3 2002" />
+		<x value="Q4 2002" />
+		<x value="Q1 2003" />
+		<x value="Q2 2003" />
+		<x value="Q3 2003" />
+		<x value="Q4 2003" />
+		<x value="Q1 2004" />
+		<x value="Q2 2004" />
+		<x value="Q3 2004" />
+		<x value="Q4 2004" />
+		<x value="Q1 2005" />
+		<x value="Q2 2005" />
+		<x value="Q3 2005" />
+		<x value="Q4 2005" />
+	</abscissa_data>
+	<ordinate_data seriesName="Units" color="0080C0" alpha="50" size="3.5">
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="0" />
+		<y value="192" />
+		<y value="262" />
+		<y value="319" />
+		<y value="489" />
+		<y value="633" />
+		<y value="904" />
+		<y value="1215" />
+		<y value="1358" />
+		<y value="1482" />
+		<y value="1666" />
+		<y value="1811" />
+		<y value="2051" />
+		<y value="2138" />
+		<y value="2209" />
+		<y value="2247" />
+		<y value="2301" />
+	</ordinate_data>
+	<ordinate_data seriesName="Parts" color="99C50C" alpha="50" size="3.5">
+		<y value=" " />
+		<y value="2500" />
+		<y value="2000" />
+		<y value="" />
+		<y value="1000" />
+		<y value="1282" />
+		<y value="1365" />
+		<y value="1433" />
+		<y value="1559" />
+		<y value="1823" />
+		<y value="1867" />
+		<y value="2198" />
+		<y value="" />
+		<y value="" />
+		<y value="-3300" />
+		<y value="2264" />
+		<y value="2282" />
+		<y value="365" />
+		<y value="2433" />
+		<y value="2559" />
+		<y value="2823" />
+		<y value="2867" />
+		<y value="2867" />
+		<y value="" />
+	</ordinate_data>
+	<ordinate_data seriesName="Others" color="FF8040" alpha="50" size="3.5">
+		<y value="115" />
+		<y value="141" />
+		<y value="175" />
+		<y value="189" />
+		<y value="208" />
+		<y value="229" />
+		<y value="252" />
+		<y value="440" />
+		<y value="608" />
+		<y value="889" />
+		<y value="1334" />
+		<y value="456" />
+		<y value="1000" />
+		<y value="2600" />
+		<y value="3070" />
+		<y value="3451" />
+		<y value="3918" />
+		<y value="4140" />
+		<y value="4296" />
+		<y value="4519" />
+		<y value="4716" />
+		<y value="2881" />
+		<y value="1092" />
+		<y value="522" />
+	</ordinate_data>
+</graph>

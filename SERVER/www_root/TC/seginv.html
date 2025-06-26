@@ -1,0 +1,156 @@
+<SCRIPT LANGUAGE="JavaScript1.2">
+<!--
+
+/*
+Document firework script (By Matt Gabbert, mgabbert@usrtoday.com, http://www.nolag.com)
+Permission granted to Dynamic Drive to feature script in archive
+For full source and 100's more DHTML scripts, visit http://dynamicdrive.com
+*/
+
+//set Interval between each firework display, 
+var intervals=2000
+var sparksOn     = true;
+var speed        = 40;
+var power        = 3;
+
+//Dont change these values-------
+var documentWidth=documentHeight=randomx=randomy=leftcorner=topcorner=0
+var ns=(document.layers);
+var ie=(document.all);
+var ns6=(document.getElementById&&!document.all);
+var sparksAflyin = false;
+var allDivs      = new Array(10);
+var totalSparks  = 0;
+//-------------------------------
+
+function initAll(){
+	if(!ns && !ie &&!ns6){
+	sparksOn = false;
+	return;
+	}
+setInterval("firework()",intervals)
+
+if (ns)
+	document.captureEvents(Event.MOUSEDOWN | Event.MOUSEMOVE);
+	for(dNum=0; dNum<7; ++dNum){
+		if(ie)
+			allDivs[dNum]=eval('document.all.sDiv'+dNum+'.style');
+                else if (ns6)
+                        allDivs[dNum]=document.getElementById('sDiv'+dNum).style;
+		else
+			allDivs[dNum]=eval('document.layers["sDiv'+dNum+'"]');
+	}
+}
+
+function firework(){
+//below code detects the browser dimenions
+if (ie){
+documentWidth=document.body.clientWidth
+documentHeight=document.body.clientHeight
+leftcorner=document.body.scrollLeft
+topcorner=document.body.scrollTop
+}
+else if (ns||ns6){
+documentWidth=window.innerWidth
+documentHeight=window.innerHeight
+leftcorner=pageXOffset
+topcorner=pageYOffset
+
+}
+//below code randomly generates a set of coordinates that fall within the dimension
+randomx=leftcorner+Math.floor(Math.random()*documentWidth)
+randomy=topcorner+Math.floor(Math.random()*documentHeight)
+
+
+	if(sparksOn){
+		if(!sparksAflyin){
+			sparksAflyin=true;
+			totalSparks=0;
+			for(var spark=0;spark<=6;spark++){
+				dx=Math.round(Math.random()*50);
+				dy=Math.round(Math.random()*50);
+				moveTo(spark,randomx,randomy,dx,dy);
+			}
+		}
+	}
+}
+
+function moveTo(i,tempx,tempy,dx,dy){
+	if(ie){
+		if(tempy+80>(document.body.offsetHeight+document.body.scrollTop))
+			tempy=document.body.offsetHeight+document.body.scrollTop-80;
+		if(tempx+80>(document.body.offsetWidth+document.body.scrollLeft))
+			tempx=document.body.offsetWidth+document.body.scrollLeft-80;
+	}
+	else if(ns6){
+		if(tempy+80>(window.innerHeight+pageYOffset))
+			tempy=window.innerHeight+pageYOffset-80;
+		if(tempx+80>(window.innerWidth+pageXOffset))
+			tempx=window.innerWidth+pageXOffset-80;
+	}
+	if(tempx>-50&&tempy>-50){
+		tempx+=dx;tempy+=dy;	
+		allDivs[i].left=tempx;
+		allDivs[i].top=tempy;
+		dx-=power;dy-=power;
+		setTimeout("moveTo("+i+","+tempx+","+tempy+","+dx+","+dy+")",speed)
+	}
+	else
+		++totalSparks
+	if(totalSparks==7){
+		sparksAflyin=false;
+		totalSparks=0;
+	}
+}
+window.onload=initAll
+//End-->
+</script>
+
+<style>
+#sDiv0 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:Aqua; z-index:9;}
+#sDiv1 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:red; z-index:10;}
+#sDiv2 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:blue; z-index:11;}
+#sDiv3 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:orange; z-index:12;}
+#sDiv4 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:yellow; z-index:13;}
+#sDiv5 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:lightgreen; z-index:14;}
+#sDiv6 {position:absolute; height:1; width:1; font-family:arial black; font-size:15px; color:silver; z-index:15;}
+</style>
+
+<script type="text/javascript" src="calendarDateInput.js">
+
+/***********************************************
+* Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
+* Script featured on and available at http://www.dynamicdrive.com
+* Keep this notice intact for use.
+***********************************************/
+
+</script>
+
+
+<P ALIGN='center'><H2>
+... Seguimiento de Inventario
+</P></H2>
+
+<HR>
+
+    <form name='login' method='post' action='segInv1'>
+
+	<script>DateInput('orderdate', true, 'DD-MM-YYYY')</script>
+<br>
+<P> Mostrar Solo Diferencias <input name = "diferencias" Type = "CHECKBOX" Value="si"> <br></P>
+
+      <tr><td colspan=2 class=footer><input type=submit value=  'Consultar' width=250px style='width:80px; font:bold 12px verdana;'></td></tr>
+    </form>
+
+</hr>
+<P ALIGN='center'><H5>
+&#169 2008 MrSoft SA de CV
+</P></H5>
+
+<div id="sDiv0">*</div>
+<div id="sDiv1">*</div>
+<div id="sDiv2">*</div>
+<div id="sDiv3">*</div>
+<div id="sDiv4">*</div>
+<div id="sDiv5">*</div>
+<div id="sDiv6">*</div>

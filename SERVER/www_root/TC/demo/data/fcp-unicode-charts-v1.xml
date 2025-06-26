@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" bagel="0" animation="1" />
+	<header text="Envoy: multilingual web presence" font="Verdana" color="000000" size="15" />
+	<subheader text="From global marketing information" font="Verdana" color="000000" size="10" />
+	<legend show="0" font="Verdana" font_color="000000" font_size="10" bgcolor="ffffff" alternate_bg_color="EAEAEA" border_color="000000" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="150" alpha="100" />
+		<data name="ESPAÑOL (ESPAÑA)" value="20" color="FF7300" distance_sliced="8" />
+		<data name="FRANÇAIS" value="38.65" color="999999" distance_sliced="8" />
+		<data name="MIKE" value="43.43" color="00B869" distance_sliced="8" />
+		<data name="MAURICIO" value="71.42" color="FFCD00" distance_sliced="8" />
+		<data name="ภาษาไทย" value="4.24" color="A0D300" distance_sliced="8" />
+		<data name="한국어" value="2.83" color="EC0033" distance_sliced="8" />
+		<data name="繁體中文" value="13.43" color="004CB0" distance_sliced="8" />
+</graph>

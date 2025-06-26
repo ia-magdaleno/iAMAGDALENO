@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="CCCCCC" floor_color="CCCCCC" />
+	<header text="Young Women's Changins Views" font="Verdana" color="000000" size="18" />
+	<subheader text="Support for legal, unrestricted abortion among women 18-29 has dropped steadily" font="Verdana" color="000000" size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<xheaders rotate="0" color="000000" size="10" title="Source: CBS News and The New York Times polls" title_color="000000" />
+	<yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid groove="0" grid_width="550" grid_height="225" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="0" width="20" thickness="12" space="3" alpha="100" pieces_grow_bar="50" />
+	<data>
+		<categorie name="Anyone who knows it">
+			<subcategorie name="1993" value="30" color="FFFF66" />
+			<subcategorie name="2003" value="70" color="5496D1" />
+			<subcategorie name="2005" value="97" color="FF6666" />
+		</categorie>
+		<categorie name="With stricted limits">
+			<subcategorie name="1993" value="24" color="FFFF66" />
+			<subcategorie name="2003" value="15" color="56B9F9" />
+			<subcategorie name="2005" value="23" color="FF6666" />
+		</categorie>
+		<categorie name="Not permitted">
+			<subcategorie name="1993" value="60" color="FFFF66" />
+			<subcategorie name="2003" value="95" color="56B9F9" />
+			<subcategorie name="2005" value="51" color="FF6666" />
+		</categorie>
+	</data>
+</graph>

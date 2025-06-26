@@ -1,0 +1,27 @@
+
+------------------------------------------------------------------------------
+ERROR LOG of "C:\VER40\server\WEBSERVE.EXE" Date: 10-01-2011 14:09:24
+
+Xbase++ version     : Xbase++ (R) Version 1.90.355
+Operating system    : Windows Vista 06.01 Build 07600
+------------------------------------------------------------------------------
+oError:args         :
+          -> VALTYPE: U VALUE: NIL
+oError:canDefault   : N
+oError:canRetry     : N
+oError:canSubstitute: Y
+oError:cargo        : NIL
+oError:description  : Parameter has a wrong data type
+oError:filename     : 
+oError:genCode      :          2
+oError:operation    : upper
+oError:osCode       :          0
+oError:severity     :          2
+oError:subCode      :       1025
+oError:subSystem    : BASE
+oError:thread       :          1
+oError:tries        :          0
+------------------------------------------------------------------------------
+CALLSTACK:
+------------------------------------------------------------------------------
+Called from MAIN(123)

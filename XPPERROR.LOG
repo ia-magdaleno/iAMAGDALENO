@@ -1,0 +1,37 @@
+
+------------------------------------------------------------------------------
+ERROR LOG of "C:\MRTIENDA\MWA.EXE" Date: 08-11-2024 16:18:51
+
+Xbase++ version     : Xbase++ (R) Version 1.90.355
+Operating system    : Windows Vista 06.02 Build 09200
+------------------------------------------------------------------------------
+oError:args         :
+          -> VALTYPE: C VALUE: MITEMP.DBF
+          -> VALTYPE: A VALUE: {{"COD_PROD", "C", 6, 0}, {"POSICION", "N", 6, 0}}
+oError:canDefault   : Y
+oError:canRetry     : N
+oError:canSubstitute: N
+oError:cargo        : NIL
+oError:description  : File can not be created
+oError:filename     : 
+oError:genCode      :         70
+oError:operation    : DbCreate
+oError:osCode       :          0
+oError:severity     :          2
+oError:subCode      :       8999
+oError:subSystem    : BASE
+oError:thread       :          1
+oError:tries        :          0
+------------------------------------------------------------------------------
+CALLSTACK:
+------------------------------------------------------------------------------
+Called from FCHOOSE_PROD(132)
+Called from (B)MAIN(1708)
+Called from DC_XBPPUSHBUTTONSTATIC:ACTION(971)
+Called from (B)DC_XBPPUSHBUTTONSTATIC:INIT(753)
+Called from DC_XBPPUSHBUTTONSTATIC:ACTIVATE(1220)
+Called from (B)DC_XBPPUSHBUTTONSTATIC:CREATE(808)
+Called from DC_GETLIST:EVENTLOOP(4079)
+Called from DC_GETLIST:READGUI(3394)
+Called from DC_READGUI(83)
+Called from MAIN(2097)

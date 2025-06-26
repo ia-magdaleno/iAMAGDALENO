@@ -1,0 +1,169 @@
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FGENERIC_CORTE(5311)
+FCORTECAJA(3402)
+FREGISTRO(10398)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1220):
+Call Stack of Thread 3 (1724):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 08:43
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FGENERIC_CORTE(5311)
+FCORTECAJA(3402)
+FREGISTRO(10398)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1200):
+Call Stack of Thread 3 (1696):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 08:44
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FSAVES(8205)
+FCOBRO(1119)
+FREGISTRO(5600)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1208):
+Call Stack of Thread 3 (1716):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 08:49
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Not recoverable Error!
+SYS Thread-ID: 1108 
+Module: EH
+Error Codes: EH: 900 Sub: 0(0) OS: 0 XPP: 0
+Call Stack of Thread 1 (996):
+STANDARDEH(202)
+(B)ERRORSYS@0000(51)
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FENV_CTA_COMUN(3549)
+FREGISTRO(6626)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1200):
+Call Stack of Thread 3 (1668):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 09:05
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FENV_CTA_COMUN(3549)
+FREGISTRO(6626)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1208):
+Call Stack of Thread 3 (1708):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 09:08
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FENV_CTA_COMUN(3549)
+FREGISTRO(6626)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1200):
+Call Stack of Thread 3 (1700):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 09:29
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Not recoverable Error!
+SYS Thread-ID: 1124 
+Module: EH
+Error Codes: EH: 900 Sub: 0(0) OS: 0 XPP: 0
+Call Stack of Thread 1 (996):
+STANDARDEH(202)
+(B)ERRORSYS@0000(51)
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FENV_CTA_COMUN(3549)
+FREGISTRO(6626)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1216):
+Call Stack of Thread 3 (1648):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 09:39
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Error within the error handling!
+SYS Thread-ID: 996 
+Module: EXE
+Error Codes: EH: 5 Sub: -1073741819(c0000005) OS: 0 XPP: 41
+Call Stack of Thread 1 (996):
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FSAVES(8205)
+FCOBRO(1119)
+FREGISTRO(5600)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1200):
+Call Stack of Thread 3 (1700):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 09:49
+End of FATAL ERROR LOG.
+FATAL ERROR LOG 
+Not recoverable Error!
+SYS Thread-ID: 1108 
+Module: EH
+Error Codes: EH: 900 Sub: 0(0) OS: 0 XPP: 0
+Call Stack of Thread 1 (1016):
+STANDARDEH(202)
+(B)ERRORSYS@0000(51)
+@TDCPRN3@I@INIT(134)
+FSETPORT(559)
+FCANTAR(1144)
+FSAVES(8205)
+FCOBRO(1119)
+FREGISTRO(5600)
+MW_MAIN(439)
+MAIN(11)
+Call Stack of GUI Thread (1200):
+Call Stack of Thread 3 (1668):
+File: C:\MRTIENDA\REGISTRO\MW.EXE
+TimeStamp: 20241031 11:16
+End of FATAL ERROR LOG.

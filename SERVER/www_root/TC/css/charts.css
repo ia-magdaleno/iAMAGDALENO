@@ -1,0 +1,58 @@
+/* ~~~ ©2006 Rm; implementation by Vady ~~~
+	vady[at]i.com.ua
+*/
+
+div.container {
+	margin-bottom: 10px;
+	width: 605px;
+}
+div.spacer {
+	clear: both;
+	line-height: 2px;
+}
+div.float {
+	float: left;
+	/*width: 185px;*/
+	margin-right: 7px
+}
+div.float img {
+	border: 1px solid #d4d4d4
+}
+div.float img:hover {
+	border-color: #006699
+}
+div.float p {
+	font: 10px bold Verdana, Arial, Helvetica, sans-serif;
+	/*text-transform: capitalize;*/
+	text-align: center;
+	color: #808080;
+	padding: 2px;
+	margin: 0
+}
+div.headlines {
+	background: url(../images/1x1b.gif) repeat-x bottom;
+	margin: 0;
+	padding: 0;
+}
+div.headlines td {
+	height: 28px;
+}
+div.headlines th {
+	padding: 3px 10px 0;
+	color: #006699;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background: url(../images/chart-tab-2.gif) repeat-x top;
+}
+div.container td {
+	padding-left: 8px;
+}
+#chartsholder {
+	width: 605px !important
+}
+div.container table {
+	border-width: 0 1px 1px;
+	border-color: #006699;
+	border-style: solid;
+	width: 605px
+}

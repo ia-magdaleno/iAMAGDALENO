@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="v" />
+	<header text="North Pole Forecast" font="Verdana" color="000000" size="18" />
+	<subheader text="Critical temperature rates, Cº" font="Verdana" color="000000" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Period" title_color="000000" />
+	<Yheaders color="000000" size="10" title="t,o" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="DBDBDB" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="F8F8F8" border_color="000000" border_thickness="1" />
+	<bars view_value="0" width="8" space="0.5" alpha="100" view_double_bar="0" color_double_bar="ffffff" pieces_grow_bar="50" />
+		<data name="Oct" value="-22" color="4497CE" />
+		<data name="Nov" value="-28" color="FFAE54" />
+		<data name="Dec" value="-32" color="43CC67" />
+		<data name="Jan" value="-29" color="FF6654" />
+		<data name="Feb" value="-26" color="BFE34B" />
+		<data name="Mar" value="-21" color="D346B8" />
+		<data name="Apr" value="-18" color="FFE454" />
+		<data name="May" value="-12" color="4C40C3" />
+		<data name="Jun" value="-10" color="4497CE" />
+		<data name="Jul" value="-18" color="FFAE54" />
+		<data name="Aug" value="-20" color="43CC67" />
+		<data name="Sep" value="-22" color="FF6654" />
+		<data name="Oct" value="-24" color="BFE34B" />
+</graph>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="D9D9D9" floor_color="CCCCCC" />
+	<header text="Dow Jones Industrial Average" font="Verdana" color="000000" size="18" />
+	<subheader text="Delayed quote data 6/26/2006" font="Verdana" color="000000" size="15" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Daily Index" title_color="000000" />
+	<Yheaders color="000000" size="10" title="Billions" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="1" width="50" thickness="5" alpha="100" pieces_grow_bar="40" />
+		<data name="Jun 20" value="5100" color="175BE3" />
+		<data name="Jun 21" value="7900" color="FFB31A" />
+		<data name="Jun 22" value="11200" color="3C3C3C" />
+		<data name="Jun 23" value="6200" color="FFFD1A" />
+		<data name="Jun 24" value="2200" color="FF1A68" />
+		<data name="Jun 25" value="3500" color="74F418" />
+		<data name="Jun 26" value="2900" color="FF6E1A" />
+		<data name="Jun 27" value="4400" color="8215D3" />
+</graph>

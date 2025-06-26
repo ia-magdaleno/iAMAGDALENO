@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="0" background_side_color="CCCCCC" floor_color="CCCCCC" />
+	<header text="Report on Research" font="Verdana" color="000000" size="16" />
+	<subheader text="Where Nations Connect" font="Verdana" color="000000" size="14" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="225" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="1" width="40" thickness="10" alpha="100" pieces_grow_bar="40" />
+		<data name="Україна" value="253500" color="A2D400" />
+		<data name="Россия" value="394500" color="EA0036" />
+		<data name="مرحباً" value="453500" color="004EB0" />
+		<data name="中国" value="593500" color="FF7200" />
+		<data name="ישראל" value="25350" color="5800A2" />
+		<data name="ประเทศไทย" value="172700" color="FFCC00" />
+		<data name="日本国" value="358500" color="00B864" />
+</graph>

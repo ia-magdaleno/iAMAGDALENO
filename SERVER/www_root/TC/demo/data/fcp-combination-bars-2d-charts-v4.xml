@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="1" showAnchor="1" type_animation="2" />
+	<header text="Bilateral Canada/Nigeria Trade" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="15" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFFF" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title_bar="Cdn$ (millions)" title_line="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="000000" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="ffffff" border_color="000000" border_thickness="1" />
+
+	<abscissa_data>
+		<data value="2000" />
+		<data value="2001" />
+		<data value="2002" />
+		<data value="2003" />
+		<data value="2004" />
+	</abscissa_data>
+
+	<bars view_value="1" width="25" space="1" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40">
+		<categorie name="2000">
+			<subcategorie name="Exports" value="63.2" color="000000" />
+			<subcategorie name="Imports" value="430.1" color="c0c0c0" />
+		</categorie>
+		<categorie name="2001">
+			<subcategorie name="Exports" value="107.8" color="000000" />
+			<subcategorie name="Imports" value="212.7" color="c0c0c0" />
+		</categorie>
+		<categorie name="2002">
+			<subcategorie name="Exports" value="80.7" color="000000" />
+			<subcategorie name="Imports" value="203.9" color="c0c0c0" />
+		</categorie>
+		<categorie name="2003">
+			<subcategorie name="Exports" value="73.9" color="000000" />
+			<subcategorie name="Imports" value="441.9" color="c0c0c0" />
+		</categorie>
+		<categorie name="2004">
+			<subcategorie name="Exports" value="81.5" color="000000" />
+			<subcategorie name="Imports" value="94.2" color="c0c0c0" />
+		</categorie>
+	</bars>
+
+	<lines>
+		<ordinate_data seriesName="Total" color="6a6060" alpha="100" size="4">
+			<y value="493.3" />
+			<y value="320.5" />
+			<y value="284.6" />
+			<y value="515.8" />
+			<y value="175.7" />
+		</ordinate_data>
+	</lines>
+</graph>

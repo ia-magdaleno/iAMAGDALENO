@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="0" showAnchor="1" type_animation="2" />
+	<header text="" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="15" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title_bar="$" title_line="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="000000" grid_alpha="20" grid_thickness="1" bg_color="ffffcc" bg_alpha="70" alternate_bg_color="ffffcc" border_color="000000" border_thickness="1" />
+
+	<abscissa_data>
+		<data value="Jan-04" />
+		<data value="Feb-04" />
+		<data value="Mar-04" />
+		<data value="Apr-04" />
+		<data value="May-04" />
+		<data value="Jun-04" />
+		<data value="Jul-04" />
+		<data value="Aug-04" />
+	</abscissa_data>
+
+	<bars name="Inquiries" view_value="0" width="25" color="ccccff" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40">
+		<bar value="220" color="0099FF" />
+		<bar value="530" color="FF9933" />
+		<bar value="600" color="FF66CC" />
+		<bar value="330" color="CCCC00" />
+		<bar value="280" color="0099FF" />
+		<bar value="450" color="FF9933" />
+		<bar value="200" color="FF66CC" />
+		<bar value="300" color="CCCC00" />
+	</bars>
+
+	<lines>
+		<ordinate_data seriesName="Gross Sales " color="993300" alpha="100" size="3">
+			<y value="203.432" />
+			<y value="150.453" />
+			<y value="821.420" />
+			<y value="740.004" />
+			<y value="234.234" />
+			<y value="260.324" />
+			<y value="503.453" />
+			<y value="110.132" />
+		</ordinate_data>
+	</lines>
+</graph>

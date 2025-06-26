@@ -1,0 +1,317 @@
+
+<HTML>
+<HEAD><TITLE>Xb2.NET SSL FAQ</TITLE>
+  <STYLE TYPE="text/css">
+    BODY {font: normal 11pt times,arial,helvetica; color: black; background-color: #ffffff;}
+    H1 {font: bold 14pt arial,helvetica; color: black; padding: 0px;}
+    H2 {font: bold 12pt arial,helvetica; color: navy; padding: 0px;}
+    CODE {font: normal 10pt monospace; color: navy; padding-top: 10px; padding-bottom: 10px;  display:block}
+    Q    {font: bold; color: olive;}
+    I    {color: green;}
+    B {font: bold 10pt monospace; color: brown;}
+    P {margin-left: 20px; display: block}
+    P.1 {margin-top: 8px; margin-bottom: 6px; display: block}
+    P.2 {font: normal 11pt times,arial,helvetica; color: maroon; margin-left: 8px; margin-top: 8px; margin-bottom: 20px; display: block}
+    a:link, a:visited {color:#0000FF; text-decoration:none;}
+    a:active, a:hover {color:#FF0000; cursor:hand; text-decoration:underline;}
+  </STYLE>
+</HEAD>
+<BODY>
+
+
+<H1>
+Xb2.NET SSL - Frequently Asked Questions:
+<hr noshade>
+</H1>
+
+
+
+<H2>What is SSL and why do I need it? </H2>
+
+   <p class=1>
+   Normal web traffic is sent unencrypted over the Internet. Anyone with access to the right tools can spy on
+   all of that traffic. Obviously, this can lead to problems, especially where security and privacy is
+   necessary, such as in credit card data and bank transactions. The Secure Socket Layer (SSL) is used to
+   encrypt the data stream between the web server and the web client (the browser).
+
+   <p class=1>
+   SSL makes use of what is known as asymmetric cryptography, commonly referred to as public key cryptography
+   (PKI). With public key cryptography, two keys are created; one public and one private. Anything encrypted
+   with either key can only be decrypted with its corresponding key. Thus if a message or data stream were
+   encrypted with the server's private key, it can be decrypted only using its corresponding public key,
+   ensuring that the data only could have come from the server.
+
+   <p class=1>
+   If SSL utilizes public key cryptography to encrypt the data stream traveling over the Internet, why is a
+   certificate necessary? The technical answer to that question is that a certificate is not really necessary;
+   the data is secure and cannot easily be decrypted by a third party. However, certificates do serve a
+   crucial role in the communication process. The certificate, signed by a trusted Certifying Authority (CA),
+   ensures that the certificate holder is really who he claims to be. Without a trusted signed certificate,
+   your data may be encrypted, however, the party you are communicating with may not be whom you think.
+   Without certificates, impersonation attacks would be much more common.
+
+
+</p><H2>What is PKI? </H2>
+
+   <p class=1>
+   Public Key Infrastructure (PKI) is the entire system that supports the implementation and operation of a
+   certificate-based public key cryptographic system.
+
+
+</p><H2>What are RSA Private Keys, CSRs and Certificates? </H2>
+
+   <p class=1>
+   The RSA private key file is a digital file that you can use to decrypt messages sent to you. It has a
+   public component that you distribute (via your Certificate file) which allows people to encrypt those
+   messages to you. A Certificate Signing Request (CSR) is a digital file containing your public key and
+   your name. You send the CSR to a Certifying Authority (CA) to be converted into a real Certificate. A
+   Certificate contains your RSA public key, your name, the name of the CA, and is digitally signed by your
+   CA. Browsers that know the CA can verify the signature on that Certificate, thereby obtaining your RSA
+   public key. This enables them to send messages that only you can decrypt.
+
+
+</p><H2>What does a Digital Certificate contain? </H2>
+
+   <p class=1>
+   Digital Certificates contain the owner's public key, the owner's name, an expiration date, the name of the
+   Certifying Authority that issued the Digital Certificate, a serial number, and perhaps some other information.
+
+
+</p><H2>How can I create a dummy SSL server Certificate for testing purposes? </H2>
+
+   <p class=1>
+   A Certificate does not have to be signed by a public CA. You can use your private key to sign the
+   Certificate which contains your public key. This is commonly referred to as a "self-signed certificate".
+   Client browsers will display a warning dialog indicating that the signing certificate authority is unknown
+   and not trusted when trying to connect to an HTTPS server that uses a self-signed certificate. Users can
+   eliminate this warning dialog by manually installing the certificate into their browsers.
+
+   <p class=1>
+   The following OpenSSL command will create a self-signed certificate named MYCERT.PEM. This command uses a
+   configuration file, XB2NET.CNF that is included with the Xb2.NET OpenSSL distribution package. The
+   generated certificate expires after 90 days and is not encrypted:
+
+   <p class=1>
+   <b>
+   openssl req -new -x509 -days 90 -nodes -config xb2net.cnf -out mycert.pem -keyout mycert.pem
+   </b>
+
+   <ul>
+   Where:
+     <br>
+     <i>-new</i> = generate a new key<br>
+     <i>-x509</i> = output a self signed certificate instead of a certificate request<br>
+     <i>-days 90</i> = make the certificate valid for 90 days<br>
+     <i>-nodes</i> = don't encrypt the private key<br>
+     <i>-config xb2net.cnf</i> = the name of the template file to use<br>
+     <i>-out mycert.pem</i> = file name where to output the SSL certificate<br>
+     <i>-keyout mycert.pem</i> = file name where to output the private key
+     </ul>
+
+
+
+</p><H2>How can I create a real SSL certificate signed by public CA (Certifying Authority)? </H2>
+
+<p class=1>
+Here is a step-by-step description:
+
+<ol>
+<li>Run the following OpenSSL command to create a CSR (certificate signing request) and private key. This
+    command uses a configuration file, XB2NET.CNF which is included with the Xb2.NET OpenSSL distribution
+    package:
+
+    <br><br><b>
+    openssl req -new -nodes -keyout mykey.pem -out mycsr.pem -config xb2net.cnf
+    </b><br><br>
+
+    The above command will create two files: MYKEY.PEM (your private key) and MYCSR.PEM (the Certificate
+    Signing Request).
+    <br><br>
+
+    During the generation of the CSR, you will be prompted for several pieces of information. These are the
+    X.509 attributes of the certificate. One of the prompts will be for "Common Name (server domain/host
+    name)". It is important that this field be filled in with the fully qualified domain name of the server to
+    be protected by SSL. If the website to be protected will be https://www.server.com, then enter
+    www.server.com at this prompt.
+    <br><br>
+
+    A sample CSR generation session is shown below, with sample responses shown in bold:
+
+    <code><pre>
+    D:\OpenSSL><b>openssl req -new -nodes -keyout mykey.pem -out mycsr.pem -config xb2net.cnf</b>
+    Loading 'screen' into random state - done
+    Generating a 1024 bit RSA private key
+    ......................................++++++
+    ............................++++++
+    writing new private key to 'mykey.pem'
+    -----
+    You are about to be asked to enter information that will be incorporated
+    into your certificate request.
+    What you are about to enter is what is called a Distinguished Name or a DN.
+    There are quite a few fields but you can leave some blank
+    For some fields there will be a default value,
+    If you enter '.', the field will be left blank.
+    -----
+    Country Name (2 letter code) [AU]:<b>CA</b>
+    State or Province Name (full name) [Some-State]:<b>ON</b>
+    Locality Name (eg, city) []:<b>Toronto</b>
+    Organization Name (eg, company) [Internet Widgits Pty Ltd]:<b>Cool Software Inc.</b>
+    Organizational Unit Name (eg, section) []:
+    Common Name (server domain/host name) []:<b>www.coolsoftware.com</b>
+    Email Address []:<b>webmaster@coolsoftware.com</b>
+
+    Please enter the following 'extra' attributes
+    to be sent with your certificate request
+    A challenge password []:
+    An optional company name []:
+
+    D:\OpenSSL></pre></code>
+
+
+<li>Backup the MYKEY.PEM file and keep it private. Do not disclose this file to anyone since it
+    contains your private key, which can be used to decrypt messages intended for you. In particular, make sure
+    to backup the private key because there is no way to recover it in case it is lost.
+    <br><br>
+
+<li>Send MYCSR.PEM to a Certifying Authority (CA) for signing. The process typically involves posting the
+    CSR into a web form, paying for the signing and then waiting for the signed certificate to be emailed to
+    you. This process can take anywhere from several minutes to a few days. Here is a list of some commercial CAs:
+    <br><br>
+
+    <ul type=square>
+    <li>VeriSign: <a href=http://digitalid.verisign.com>http://digitalid.verisign.com</a>
+    <li>Thawte: <a href=http://www.thawte.com>http://www.thawte.com</a>
+    <li>CertiSign: <a href=http://www.certisign.com.br>http://www.certisign.com.br</a>
+    <li>IKS GmbH: <a href=http://www.iks-jena.de/leistungen/ca/>http://www.iks-jena.de/leistungen/ca/</a>
+    <li>GlobalSign: <a href=http://www.globalsign.net>http://www.globalsign.net</a>
+    <li>RapidSSL: <a href=http://www.rapidssl.com>http://www.rapidssl.com</a>
+    <li>GoDaddy: <a href=http://www.godaddy.com>http://www.godaddy.com</a>
+    </ul>
+    <br>
+
+<li>Receive certificate from CA by email (certificate is digitally signed by your CA and contains your public
+    key, your name, and the name of the CA). The certificate may be received as either a separate file
+    attachment or as base64-encoded text within the email body. In the later case, you can copy and paste the
+    certificate text (including the lines that say BEGIN CERTIFICATE and END CERTIFICATE) into a text file for
+    use within your application. You can see the details of the received Certificate via the following OpenSSL
+    command (assuming MYCERT.PEM is the name of the certificate file):
+
+    <br><br><b>
+    openssl x509 -noout -text -in mycert.pem
+    </b><br><br>
+
+<li>In order to simplify things, you can combine your private key (created in step 1) and the certificate
+    (received in step 4) into one file. Create a new text file, eg. MYCERT.PEM as follows:
+
+    <ol type=a>
+    <li> Copy and paste all text from MYKEY.PEM (created in step 1)
+    <li> Append certificate text received from Certifying Authority (item 4 above)
+    </ol>
+
+    <br>
+    You should have a text file that looks something like this:
+
+    <code><pre>
+    -----BEGIN RSA PRIVATE KEY-----
+    MIICXAIBAAKBgQCquFagDY6vXyrqGEmg5jNMy8cgWm9HeaKUoz5JPqGRV9KoWMDe
+    0MFG1iBobMzsuWv+FdWEv8wneVhSJGTrLJJ5XY5vZVxK9Q3DUl9Sl7/VAund2VI1
+    3udB67ta9+H7+j42d8zW8SejSkCLsilnHLsBMmDt2tfj9cPc2Ge+GKIXRwIDAQAB
+    AoGAVSB8GW0JNAtpU7dup2uCMw39qfVOPb66QhGwUkeHuvim00kGS1Seu5q0KD3w
+    ZS4EWns6r+oPe7N3ReZd6CKemlLUgRKDdVGCYCOT8vp03p/KVnv6yQ7GbK5hO3Hx
+    /muP5VIzg85ZFdvscsHlrAWz6tRLhcoygjJa5GF998t47tkCQQDiarzfi1DHPlhU
+    cnPUz2OA/WU+G+s3ztkk2mlF/x877QRfAdxT5k/KRnWi7xS+fCyxgI5mteMxbNTo
+    k/KHqwUFAkEAwQaigqW2bsUylsz9e30RH5YsDVkcyhXGCBx5b+odDevp6Gepiyj2
+    JQw/Uzq+0ugRHJfw69ajk9EdWfLinBtc2wJAMbNgdmmsd7AVz6O4DXTg0MXO3Y1f
+    WsbLH63aAgV4o7zpgrlz1e7ugOZqmDOHCDFV1jj0CVPP5V+QdOVVDbbayQJADD5c
+    fob+XGZbwB7+kR+sv2EqKCqX3eWlqwwLU+L4ttJZAunYYkBV5KGzPpdCVWRs+XBV
+    0s/Jjm28O+FhKF+/8wJBALOvzUkUxhOVDtZdStwhKaLaRsDtCiKvI6zAAeF1g3rN
+    /W69ZgvRaUsta9I19jDl1kiidDScnvypsg7cmh2UMeE=
+    -----END RSA PRIVATE KEY-----
+    -----BEGIN CERTIFICATE-----
+    MIIDOTCCAqKgAwIBAgIBADANBgkqhkiG9w0BAQQFADB3MQswCQYDVQQGEwJDQTEQ
+    MA4GA1UECBMHT250YXJpbzEQMA4GA1UEBxMHVG9yb250bzEQMA4GA1UEChMHWGIy
+    Lk5FVDESMBAGA1UEAxMJbG9jYWxob3N0MR4wHAYJKoZIhvcNAQkBFg9zdXBwb3J0
+    QHhiMi5uZXQwHhcNMDUwMTA3MTcwMTQzWhcNMTUwMTA1MTcwMTQzWjB3MQswCQYD
+    VQQGEwJDQTEQMA4GA1UECBMHT250YXJpbzEQMA4GA1UEBxMHVG9yb250bzEQMA4G
+    A1UEChMHWGIyLk5FVDESMBAGA1UEAxMJbG9jYWxob3N0MR4wHAYJKoZIhvcNAQkB
+    Fg9zdXBwb3J0QHhiMi5uZXQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKq4
+    VqANjq9fKuoYSaDmM0zLxyBab0d5opSjPkk+oZFX0qhYwN7QwUbWIGhszOy5a/4V
+    1YS/zCd5WFIkZOssknldjm9lXEr1DcNSX1KXv9UC6d3ZUjXe50Hru1r34fv6PjZ3
+    zNbxJ6NKQIuyKWccuwEyYO3a1+P1w9zYZ74YohdHAgMBAAGjgdQwgdEwHQYDVR0O
+    BBYEFEhcvVIyTaJpZ5x/Vz1VvUuv5rkcMIGhBgNVHSMEgZkwgZaAFEhcvVIyTaJp
+    Z5x/Vz1VvUuv5rkcoXukeTB3MQswCQYDVQQGEwJDQTEQMA4GA1UECBMHT250YXJp
+    bzEQMA4GA1UEBxMHVG9yb250bzEQMA4GA1UEChMHWGIyLk5FVDESMBAGA1UEAxMJ
+    bG9jYWxob3N0MR4wHAYJKoZIhvcNAQkBFg9zdXBwb3J0QHhiMi5uZXSCAQAwDAYD
+    VR0TBAUwAwEB/zANBgkqhkiG9w0BAQQFAAOBgQBzYzdwpbuMH6hIWtOFuVLd3R9M
+    bw0h4xAEIhLmR82g8UgR5c6fxGIz/igod1XkNCvSaB1BXOA4aSGirYEqjuty1/HS
+    jaoG9Yd2AsccTBxrLVmy7I2LRdoxHoc1P9lmw/KUVDUlqgjOpF1imtBf6y50DpoY
+    39Fz7R54S85jzRGdOw==
+    -----END CERTIFICATE-----</pre></code>
+</ol>
+
+
+</p><H2>How do I use the certificate in my Xb2.NET web server? </H2>
+
+   <p class=1>
+   Assuming that your certificate and private key were created as described above, you should have a file
+   called MYCERT.PEM. You can reference this file as follows within your Xb2.NET application:
+
+   <code><pre>
+   // define SSL context
+   oSSL := xbSSLContext():new( SSL_v23_server )
+   // if the private key is password protected, you can supply the password using this method:
+   // oSSL:SetDefaultPassword("xYq9h750eL3")
+   oSSL:UseCertificateFile("MYCERT.PEM")
+   oSSL:UsePrivateKeyFile("MYCERT.PEM")
+
+   // check private key
+   if ! oSSL:CheckPrivateKey()
+      MsgBox("Private key does not match certificate!" + chr(10) + xbSSLGetLastError())
+   endif
+
+   // attach SSL context to HTTP server instance
+   oHTTPS := xbHTTPServer():new(INADDR_ANY, 443, oSSL)
+   oHTTPS:start()</pre></code>
+
+
+</p><H2>Here are some additional examples of using the OpenSSL command line utility: </H2>
+
+   <p class=1>
+   Display OpenSSL version information:
+   <br><b>openssl version</b>
+
+   <p class=1>
+   Remove the password phrase on an RSA private key:
+   <br><b>openssl rsa -in key.pem -out keyout.pem</b>
+
+   <p class=1>
+   Encrypt a private key using triple DES:
+   <br><b>openssl rsa -in key.pem -des3 -out keyout.pem</b>
+
+   <p class=1>
+   Print out the components of a private key:
+   <br><b>openssl rsa -in key.pem -text -noout</b>
+
+   <p class=1>
+   To just output the public part of a private key:
+   <br><b>openssl rsa -in key.pem -pubout -out pubkey.pem</b>
+
+   <p class=1>
+   Convert a private key from PEM to DER format:
+   <br><b>openssl rsa -in key.pem -outform DER -out keyout.der</b>
+
+   <p class=1>
+   Convert a certificate from PEM to DER format:
+   <br><b>openssl x509 -in cert.pem -inform PEM -out cert.der -outform DER</b>
+
+   <p class=1>
+   Verify a certificate:
+   <br><b>openssl verify -purpose any cert.pem</b>
+   </p>
+
+
+<p><hr size=3 noshade>
+<a href="http://www.Xb2.NET" target="_top">Xb2.NET homepage</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+</body>
+</html>

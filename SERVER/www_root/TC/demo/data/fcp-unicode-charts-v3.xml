@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" showAnchor="1" showArea="0" type_animation="2">
+		<header text="Total points" font="Verdana" color="000000" size="18" />
+		<subheader text="" font="Verdana" color="000000" size="14" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+		<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+		<grid showX="1" showY="1" persent_stepY_from_stepX="120" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="20" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="ffffff" border_color="000000" border_thickness="2" />
+	</general_settings>
+	<abscissa_data>
+		<x value="1990" />
+		<x value="1992" />
+		<x value="1994" />
+		<x value="1996" />
+		<x value="1998" />
+		<x value="2000" />
+		<x value="2001" />
+		<x value="2002" />
+		<x value="2003" />
+	</abscissa_data>
+	<ordinate_data seriesName="ελληνική γλώσσα" color="0080C0" size="3.5">
+		<y value="1358" />
+		<y value="1482" />
+		<y value="1666" />
+		<y value="1811" />
+		<y value="2051" />
+		<y value="2138" />
+		<y value="2209" />
+		<y value="2247" />
+		<y value="2301" />
+	</ordinate_data>
+	<ordinate_data seriesName="български език" color="FF0000" size="3.5">
+		<y value="1125" />
+		<y value="1320" />
+		<y value="1518" />
+		<y value="1797" />
+		<y value="1893" />
+		<y value="2010" />
+		<y value="2057" />
+		<y value="2166" />
+		<y value="2197" />
+	</ordinate_data>
+	<ordinate_data seriesName="русский язык" color="FF0080" size="3.5">
+		<y value="2264" />
+		<y value="2282" />
+		<y value="2365" />
+		<y value="2433" />
+		<y value="2559" />
+		<y value="2823" />
+		<y value="2867" />
+		<y value="2867" />
+		<y value="2867" />
+	</ordinate_data>
+</graph>

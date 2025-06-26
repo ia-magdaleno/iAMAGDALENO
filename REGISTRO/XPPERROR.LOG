@@ -1,0 +1,34 @@
+
+------------------------------------------------------------------------------
+ERROR LOG of "C:\MRTIENDA\REGISTRO\MW.EXE" Date: 31-10-2024 09:44:30
+
+Xbase++ version     : Xbase++ (R) Version 1.90.355
+Operating system    : Windows Vista 06.02 Build 09200
+------------------------------------------------------------------------------
+oError:args         :
+          -> VALTYPE: O CLASS: tdcPrn3
+          -> VALTYPE: C VALUE: 
+oError:canDefault   : N
+oError:canRetry     : N
+oError:canSubstitute: Y
+oError:cargo        : NIL
+oError:description  : Internal data structures corrupted
+oError:filename     : 
+oError:genCode      :         41
+oError:operation    : :Create
+oError:osCode       :          0
+oError:severity     :          2
+oError:subCode      :          5
+oError:subSystem    : BASE
+oError:thread       :          1
+oError:tries        :          0
+------------------------------------------------------------------------------
+CALLSTACK:
+------------------------------------------------------------------------------
+Called from TDCPRN3:INIT(134)
+Called from FSETPORT(559)
+Called from FCANTAR(1144)
+Called from FENV_CTA_COMUN(3549)
+Called from FREGISTRO(6626)
+Called from MW_MAIN(439)
+Called from MAIN(11)

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="F6F6F6" showAnchor="0" showArea="1" type_animation="2">
+		<header text="Sales Map" font="Verdana" color="000000" size="18" />
+		<subheader text="* Dollar amounts are rounded up" font="Verdana" color="FF423C" size="10" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Price, $" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="30" grid_width="550" grid_height="250" grid_color="E5E5E5" grid_alpha="40" grid_thickness="1" bg_color="ffffff" bg_alpha="100" alternate_bg_color="FFFCF0" border_color="000000" border_thickness="2" />
+	</general_settings>
+	<abscissa_data>
+		<x value="January" />
+		<x value="February" />
+		<x value="March" />
+		<x value="April" />
+		<x value="May" />
+	</abscissa_data>
+	<ordinate_data seriesName="Windows XP" color="D8D801" size="3.5">
+		<y value="66" color_area="AFD8F8" alpha_area="80" />
+		<y value="30" color_area="F6BD0F" alpha_area="80" />
+		<y value="300" color_area="8BBA00" alpha_area="80" />
+		<y value="200" color_area="FFFF00" alpha_area="80" />
+		<y value="50" color_area="A66EDD" alpha_area="80" />
+	</ordinate_data>
+</graph>

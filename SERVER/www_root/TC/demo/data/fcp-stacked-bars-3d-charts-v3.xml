@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="F0E7E2" floor_color="F0E7E2" />
+	<header text="Television and Radio Broadcasting" font="Verdana" color="000000" size="18" />
+	<subheader text="Net Profit Margin, by Revenue Category, 2002" font="Verdana" color="000000" size="15" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Slide 6" title_color="000000" />
+	<Yheaders color="000000" size="10" title="Percent of revenue" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="225" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="1" width="40" thickness="15" space="3" alpha="100" pieces_grow_bar="30" />
+	<data>
+		<categorie name="Canada">
+			<subcategorie name="Satellite" value="-9" color="084CB3" />
+			<subcategorie name="Radio" value="12" color="67C209" alpha="100" />
+			<subcategorie name="TV" value="45" color="FFA60C" />
+		</categorie>
+		<categorie name="US">
+			<subcategorie name="Satellite" value="11" color="084CB3" />
+			<subcategorie name="Radio" value="25" color="67C209" />
+			<subcategorie name="TV" value="42" color="FFA60C" />
+			<subcategorie name="Other (VoIP, Internet)" value="15" color="FF0000" />
+		</categorie>
+		<categorie name="Europe">
+			<subcategorie name="Satellite" value="15" color="084CB3" />
+			<subcategorie name="Radio" value="20" color="67C209" />
+			<subcategorie name="TV" value="25" color="FFA60C" />
+			<subcategorie name="Other (VoIP, Internet)" value="7" color="FF0000" />
+		</categorie>
+		<categorie name="Japan">
+			<subcategorie name="Satellite" value="-11" color="084CB3" />
+			<subcategorie name="Radio" value="10" color="67C209" />
+			<subcategorie name="TV" value="18" color="FFA60C" />
+		</categorie>
+	</data>
+</graph>

@@ -1,0 +1,6 @@
+= SOAP REQUEST: SaveMessage
+Date: 20080715, Time: 10:05:34, Client IP: 127.0.0.1
+UserName: MAURICIO                                
+Message:
+HOLA BUENOS DIAS                        
+

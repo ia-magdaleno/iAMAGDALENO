@@ -1,0 +1,43 @@
+
+----------------------------------------
+       CORTE        
+      DE CAJA       
+      -- Z --       
+    No.00001 [P]    
+  CAJA: 001 TURNO: 1 FECHA: 29-10-2024  
+       - SIN FOLIOS TRABAJADOS -        
+----------------------------------------
+     TOTAL DE VENTA       $         0.00
+----------------------------------------
+     TOTALES EN CAJA
+
+     PESOS
+
+                        SUMA $      0.00
+               FONDO DE CAJA $      0.00
+                             -----------
+      TOTAL EFECTIVO EN CAJA $      0.00
+----------------------------------------
+                 VENTA BRUTA $      0.00
+----------------------------------------
+     SEPARACION DE VENTA POR TASA
+
+
+                      TOTAL  $      0.00
+     IVA         $      0.00
+     TOTAL                   $      0.00
+----------------------------------------
+     CLIENTES
+      (PAX)          ADULTOS :         0
+                       NIÑOS :         0
+----------------------------------------
+     VENTAS POR FAMILIA
+
+
+                      TOTAL  $      0.00
+----------------------------------------
+
+     VENTAS POR CAJERO
+
+
+                      TOTAL  $      0.00

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" />
+	<header text="Summary of Income and Expenditure 2004/5" font="Verdana" color="000000" size="18" />
+	<subheader text="Income £m" font="Verdana" color="000000" size="15" />
+	<legend font="Verdana" font_color="000000" font_size="11" bgcolor="FFFFFF" alternate_bg_color="F0E7E2" border_color="C4A596" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="120" height="35" angle_slope="25" alpha_sides="85" alpha_lines="20" />
+		<data name="Donations £5.5" value="38" color="5390FF" />
+		<data name="Goverment institutions £5.4" value="38" color="4C4C4C" />
+		<data name="Consultancy & publishing £2.3" value="13" color="FF53DA" />
+		<data name="Fundraising £1.5" value="9" color="FFF053" />
+		<data name="Other £0.3" value="2" color="4BFF3C" />
+</graph>

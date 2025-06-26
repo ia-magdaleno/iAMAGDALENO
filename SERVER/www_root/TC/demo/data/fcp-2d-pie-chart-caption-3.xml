@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" bagel="1" animation="0" />
+	<header text="Foreign Visitors" font="Verdana" color="000000" size="15" />
+	<subheader text="International companies that participated in the exhibition" font="Verdana" color="000000" size="12" />
+	<legend show="0" font="Verdana" font_color="000000" font_size="10" bgcolor="FFFFE3" alternate_bg_color="00FFFF" border_color="000000" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="110" alpha="100" />
+		<data name="Japan" value="39.9" color="FDD3A4" distance_sliced="0" />
+		<data name="Taiwan" value="14.0" color="F98C0F" distance_sliced="0" />
+		<data name="Southeast Asia" value="18.2" color="FDCC95" distance_sliced="0" />
+		<data name="Europe" value="7.8" color="FA931D" distance_sliced="0" />
+		<data name="China" value="5.0" color="FDD3A4" distance_sliced="0" />
+		<data name="Middle East" value="1.8" color="FA9A2C" distance_sliced="0" />
+		<data name="Africa" value="2.9" color="FDDBB3" distance_sliced="0" />
+		<data name="North America" value="6.6" color="FAA13B" distance_sliced="0" />
+		<data name="Australia" value="0.9" color="FEE9D1" distance_sliced="0" />
+		<data name="Other" value="2.9" color="FBA84A" distance_sliced="0" />
+</graph>

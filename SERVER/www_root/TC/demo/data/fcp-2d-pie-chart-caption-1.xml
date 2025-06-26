@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" bagel="0" animation="0" />
+	<header text="Portable Music Player Survey Results" font="Verdana" color="000000" size="15" />
+	<subheader text="Question 2: What do you like least about this portable music player?" font="Verdana" color="000000" size="12" />
+	<legend show="0" font="Verdana" font_color="000000" font_size="10" bgcolor="FFFFE3" alternate_bg_color="00FFFF" border_color="000000" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<pie_chart radius="110" alpha="100" />
+		<data name="Battery Life" value="20" color="FF004E" distance_sliced="0" />
+		<data name="Size" value="38.65" color="5400B6" distance_sliced="0" />
+		<data name="Price" value="13.43" color="FFC500" distance_sliced="0" />
+		<data name="Design" value="7.42" color="00CB50" distance_sliced="0" />
+		<data name="Capacity" value="4.24" color="C4F500" distance_sliced="0" />
+		<data name="Accessories" value="2.83" color="0062C6" distance_sliced="0" />
+		<data name="Quality" value="13.43" color="FF6D00" distance_sliced="0" />
+</graph>

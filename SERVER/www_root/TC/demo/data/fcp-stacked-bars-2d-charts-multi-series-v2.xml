@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="h" />
+	<header text="Benefits Companies" font="Verdana" color="000000" size="18" />
+	<subheader text="" font="Verdana" color="000000" size="15" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="12" title="Million, $" title_color="000000" />
+	<Yheaders color="000000" size="12" title="Year" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="000000" grid_alpha="10" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="FFFBEB" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="25" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40" />
+	<data>
+		<categorie name="1998">
+			<series>
+				<subcategorie name="Microsoft" value="30" color="34B125" />
+				<subcatee name="Sun" value="67.23" color="EDBC32" />
+			</series>
+			<series>
+				<subcategorie name="Sales (thousands, $)" value="20" color="737373" />
+			</series>
+		</categorie>
+		<categorie name="2000">
+			<series>
+				<subcategorie name="Microsoft" value="37.9" color="34B125" />
+				<subcategorie name="Sun" value="-10" color="ED3235" />
+			</series>
+			<series>
+				<subcategorie name="Negative profits (thousands, $)" value="-23" color="000000" />
+				<subcategorie name="Sales (thousands, $)" value="10" color="737373" />
+			</series>
+		</categorie>
+		<categorie name="2002">
+			<series>
+				<subcategorie name="Microsoft" value="8.8" color="34B125" />
+				<subcatee name="Sun" value="67.23" color="EDBC32" />
+			</series>
+			<series>
+				<subcategorie name="Sales (thousands, $)" value="50" color="737373" />
+			</series>
+		</categorie>
+	</data>
+</graph>

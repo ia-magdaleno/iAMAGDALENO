@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" showAnchor="1" showBubble="1" Bubble_gradient="1">
+		<header text="Focal spots" font="Verdana" color="000000" size="18" />
+		<subheader text="Initial wire scans" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="E6F5FF" font_size="10" />
+		<Xheaders show_calibration="1" rotate="90" color="000000" size="10" title="Horizontal microns" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Vertical microns" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" xAxisLines="10" yAxisLines="5" xAxisMinValue="45" xAxisMaxValue="120" yAxisMinValue="1000" yAxisMaxValue="5000" grid_width="550" grid_height="250" grid_color="000000" grid_alpha="20" grid_thickness="1" bg_color="F2FAFF" bg_alpha="100" alternate_bg_color="ffffff" border_color="000000" border_thickness="1" />
+	</general_settings>
+
+	<data seriesName="Positrons" color="7F7F7F" alpha="80" size="3.5" z_Prefix="µ">
+		<value x="55" y="1433" z="10" name="Positron #1" />
+		<value x="65" y="1559" z="20" name="Positron #2" />
+		<value x="70" y="1823" z="5" name="Positron #3" />
+		<value x="85" y="1867" z="50" name="Positron #4" />
+		<value x="99.1" y="2198" z="40" name="Positron #5" />
+	</data>
+
+	<data seriesName="Electrons" color="FF8040" alpha="80" size="3.5" z_Prefix="µ">
+		<value x="63" y="1559" z="25" name="Electron #1" />
+		<value x="70" y="2750" z="45" name="Electron #2" />
+		<value x="85" y="3017" z="35" name="Electron #3" />
+		<value x="99.1" y="3451" z="28" name="Electron #4" />
+		<value x="103" y="3918" z="22" name="Electron #5" />
+		<value x="110" y="2532" z="32" name="Electron #6" />
+		<value x="115" y="3565" z="16" name="Electron #7" />
+	</data>
+</graph>

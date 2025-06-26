@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="v" />
+	<header text="Current account balance to GDP" font="Verdana" color="000000" size="18" />
+	<subheader text="(%)" font="Verdana" color="000000" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="300" grid_height="250" grid_color="000000" grid_alpha="25" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="FFF8DC" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="20" space="0.5" alpha="80" view_double_bar="1" color_double_bar="FFFFFF" pieces_grow_bar="40" />
+	<data>
+		<categorie name="N.America">
+			<subcategorie name="Exports" value="9.4" color="BFBFBF" />
+			<subcategorie name="Imports" value="5.2" color="737373" />
+			<subcategorie name="Balance" value="4.2" color="333333" />
+		</categorie>
+		<categorie name="Japan">
+			<subcategorie name="Exports" value="-3.4" color="BFBFBF" />
+			<subcategorie name="Imports" value="1.5" color="737373" />
+			<subcategorie name="Balance" value="-2.1" color="333333" />
+		</categorie>
+		<categorie name="Europe">
+			<subcategorie name="Exports" value="5.1" color="BFBFBF" />
+			<subcategorie name="Imports" value="7.2" color="737373" />
+			<subcategorie name="Balance" value="-2.9" color="333333" />
+		</categorie>
+	</data>
+</graph>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="h" />
+	<header text="Soundness of banks, 2001-2002" font="Verdana" color="000000" size="18" />
+	<subheader text="The Global Competitiveness Report, 2001-2002" font="Verdana" color="000000" size="14" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="DBDBDB" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="F8F8F8" border_color="000000" border_thickness="1" />
+	<bars view_value="0" width="17" space="0.5" alpha="80" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="50" />
+		<data name="Australia" value="6.9" color="333333" />
+		<data name="Canada" value="6.5" color="404040" />
+		<data name="U.K." value="6.1" color="4C4C4C" />
+		<data name="U.S." value="5.8" color="666666" />
+		<data name="France" value="5.4" color="737373" />
+		<data name="Norway" value="5.1" color="7F7F7F" />
+		<data name="Argentina" value="4.5" color="8C8C8C" />
+		<data name="Japan" value="3.2" color="999999" />
+</graph>

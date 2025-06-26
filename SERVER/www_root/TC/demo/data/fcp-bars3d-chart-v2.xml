@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="CCCCCC" floor_color="CCCCCC" />
+	<header text="Monmouth Rotation Study, 1999-02" font="Verdana" color="000000" size="18" />
+	<subheader text="University of Illinois corn-soybean-wheat rotation study" font="Verdana" color="000000" size="14" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Rotation" title_color="000000" />
+	<Yheaders color="000000" size="10" title="Income Over Inputs,$/ac/yr" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="225" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="0" width="35" thickness="15" space="3" alpha="100" pieces_grow_bar="50" />
+	<data>
+		<categorie name="Cont. C">
+			<subcategorie name="Tilled" value="110" color="FF0032" />
+			<subcategorie name="No-till" value="100" color="36C200" />
+		</categorie>
+		<categorie name="Cont. S">
+			<subcategorie name="Tilled" value="130" color="FF0032" />
+			<subcategorie name="No-till" value="160" color="36C200" />
+		</categorie>
+		<categorie name="C-S">
+			<subcategorie name="Tilled" value="270" color="FF0032" />
+			<subcategorie name="No-till" value="250" color="36C200" />
+		</categorie>
+		<categorie name="W-C-S">
+			<subcategorie name="Tilled" value="220" color="FF0032" />
+			<subcategorie name="No-till" value="210" color="36C200" />
+		</categorie>
+		<categorie name="W-S-C">
+			<subcategorie name="Tilled" value="210" color="FF0032" />
+			<subcategorie name="No-till" value="180" color="36C200" />
+		</categorie>
+	</data>
+</graph>

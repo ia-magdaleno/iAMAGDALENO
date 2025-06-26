@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="FCFFF2" floor_color="999999" />
+	<header text="Liabilities as a percentage of GDP" font="Verdana" color="000000" size="16" />
+	<subheader text="For different institutional sectors (2001)" font="Verdana" color="000000" size="12" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="9" title="Source: Swedish Financial Supervisory Authority" title_color="000000" />
+	<Yheaders color="000000" size="9" title="Nonfinancial corporations" title_rotate="90" title_color="000000" />
+	<grid groove="0" grid_width="550" grid_height="270" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="1" width="50" thickness="8" alpha="100" pieces_grow_bar="40" />
+
+	<trend_lines>
+		<line value="430" show_value="Good" font_size="10" color="FF0000" thickness="2" />
+		<line value="100" show_value="Middle" font_size="10" color="00BE72" thickness="2" />
+		<line value="-308" show_value="Bad" font_size="10" color="FF0080" thickness="2" />
+	</trend_lines>
+
+	<data name="Jan" value="-253" color="53B9DB" />
+	<data name="Feb" value="-394" color="DB8D53" />
+	<data name="Mar" value="453" color="506CD5" />
+	<data name="Apr" value="593" color="DBB553" />
+	<data name="May" value="253" color="B750D4" />
+	<data name="Jun" value="-95" color="D2DB53" />
+	<data name="Jul" value="-358" color="DB5369" />
+	<data name="Aug" value="-249" color="6CDB48" />
+</graph>

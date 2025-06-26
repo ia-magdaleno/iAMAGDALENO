@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Comprobante xmlns="http://www.sat.gob.mx/cfd/2"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv2.xsd"
+version="2.0"
+serie="SERIE A"
+folio="188" fecha="2010-09-22T13:48:35"
+noAprobacion="0123456789" anoAprobacion="2010"
+formaDePago="CONTADO" subTotal="336.610345"
+ total="367.620000" tipoDeComprobante="ingreso"
+noCertificado="12345678901234567890" certificado="" sello="">
+  <Emisor rfc="AAA010101AAA" nombre="LABORATORIOS DEL NOROESTE">
+    <DomicilioFiscal calle="AV.CASTILLO" codigoPostal="22800"
+    colonia="CENTRO" estado="BC"
+     municipio="ENSENADA" noExterior="1059"
+     pais="MEXICO"  />
+  </Emisor>
+  <Receptor nombre="MRSOFT SA DE CV"
+  rfc="MRS0404021R8">
+    <Domicilio calle="AV. BLANCARTE" codigoPostal="22800"
+    colonia="CENTRO" estado="BC"
+     municipio="ENSENADA" noExterior="759"  
+    pais="MEXICO" />
+  </Receptor>
+  <Conceptos>
+    <Concepto cantidad="1.000" descripcion="CONSUMO" importe="336.610345"  valorUnitario="336.610345" ></Concepto>  </Conceptos>
+  <Impuestos>
+    <Traslados>
+      <Traslado impuesto="IVA" tasa="11.00" importe="31.009655" />
+      <Traslado impuesto="IEPS" tasa="0.00" importe="0" />
+    </Traslados>
+  </Impuestos>
+</Comprobante>
+

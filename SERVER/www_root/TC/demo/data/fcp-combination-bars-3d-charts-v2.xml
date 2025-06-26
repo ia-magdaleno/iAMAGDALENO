@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+
+	<general_settings show_background_side="1" bg_color='FFFFFF' background_side_color='e4e0e0' floor_color='b2b2b2' common_calibrationYaxis='0' showAnchor="1" type_animation="1"/>
+	<header  text='Simultaneous Increase in Number of' font='Verdana' color='000000' size='15'/> 
+	<subheader  text='Households and Decrease in Household Size' font='Verdana' color='000000' size='15'/> 
+	<legend_popup font='Verdana' bgcolor='FFFFE3' font_size='10'/>
+	<Xheaders rotate='0' color='000000' size='10' title='Test Xheaders' title_color='000000'/>
+	<Yheaders color='000000' size='10' title_bar='Households(Millions)' title_line='Average Household Size (Persons)' title_rotate='90' title_color='000000'/>
+	<grid groove='1' grid_width='550' grid_height='225' grid_color='000000' grid_alpha='40' grid_thickness='1'/>
+	
+	<abscissa_data>
+		<data value="2005" /> 
+		<data value="2010" /> 
+		<data value="2015" /> 
+		<data value="2020" /> 
+	</abscissa_data>
+	
+	<bars name='Number of Households' view_value='0' width='40' thickness='10' color="5b62ea"  alpha='100' pieces_grow_bar='40'>
+		<bar  value="50.7" color="0099FF" /> 
+		<bar  value="53.2" color="FF9933" /> 
+		<bar  value="55.2" color="FF66CC" /> 
+		<bar  value="56.8" color="CCCC00" /> 
+	</bars>
+	
+	<lines>
+		<ordinate_data seriesName='Average Household Size' color='FFFF00' alpha="100" size='4.5'>
+			<y value='2.48'/>
+			<y value='2.37'/>
+			<y value='2.28'/>
+			<y value='2.15'/>
+		</ordinate_data>
+	</lines>
+
+</graph>

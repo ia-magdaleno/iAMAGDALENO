@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="FFFFFF" show_background_side="1" background_side_color="F0E7E2" floor_color="D3BAAD" />
+	<header text="Current account balance to GDP" font="Verdana" color="000000" size="18" />
+	<subheader text="(%)" font="Verdana" color="000000" size="15" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="" title_color="000000" />
+	<Yheaders color="000000" size="10" title="" title_rotate="90" title_color="000000" />
+	<grid groove="1" grid_width="550" grid_height="225" grid_color="000000" grid_alpha="40" grid_thickness="1" />
+	<bars view_value="1" width="40" thickness="15" alpha="100" pieces_grow_bar="40" />
+	<data name="1997" value="27" color="0099FF" />
+	<data name="1998" value="8.7" color="FF9933" />
+	<data name="1999" value="-15" color="FF66CC" />
+	<data name="2000" value="59" color="CCCC00" />
+	<data name="2001" value="25" color="0099FF" />
+	<data name="2002" value="17" color="FF9933" />
+	<data name="2003" value="36" color="FF66CC" />
+	<data name="2004" value="28" color="CCCC00" />
+</graph>

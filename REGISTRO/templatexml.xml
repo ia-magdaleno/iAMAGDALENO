@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Comprobante xmlns="http://www.sat.gob.mx/cfd/2"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv2.xsd"
+version="2.0"
+serie="[serie]"
+folio="[folio]" fecha="[fecha]"
+noAprobacion="[noAprobacion]" anoAprobacion="[anoAprobacion]"
+formaDePago="[formaDePago]" subTotal="[subTotal]"
+descuento="[descuento]" total="[total]" tipoDeComprobante="[tipoDeComprobante]"
+noCertificado="12345678901234567890" certificado="" sello="">
+  <Emisor rfc="[emisorRfc]" nombre="[emisorNombre]">
+    <DomicilioFiscal calle="[emisorCalle]" codigoPostal="[emisorCodigoPostal]"
+    colonia="[emisorColonia]" estado="[emisorEstado]"
+    localidad="[emisorLocalidad]" municipio="[emisorMunicipio]" noExterior="[emisorNoExterior]"
+    noInterior="[emisorNoInterior]" pais="[emisorPais]" referencia="[emisorReferencia]" />
+  </Emisor>
+  <Receptor nombre="[receptorNombre]"
+  rfc="[receptorRfc]">
+    <Domicilio calle="[receptorCalle]" codigoPostal="[receptorCodigo]"
+    colonia="[receptorColonia]" estado="[receptorEstado]"
+    localidad="[receptorLocalidad]" municipio="[receptorMunicipio]" noExterior="[receptorNoExt]" noInterior="[receptorNoInterior]" referencia="[receptorReferencia]"
+    pais="[receptorPais]" />
+  </Receptor>
+  <Conceptos>
+    <Concepto cantidad="[conceptoCantidad]" descripcion="[conceptoDesc]" importe="[conceptoImporte]" unidad="[conceptoUnidad]" valorUnitario="[conceptoValUnit]" noIdentificacion="[conceptoNoId]"></Concepto>
+  </Conceptos>
+  <Impuestos totalImpuestosRetenidos="[totalImpuestosRetenidos]" totalImpuestosTrasladados="[totalImpuestosTrasladados]">
+    <Traslados>
+      <Traslado impuesto="IVA" tasa="[trasladoIVAtasa]" importe="[trasladoImporteIVA]" />
+      <Traslado impuesto="IEPS" tasa="[trasladoTasaIEPS]" importe="[trasladoImporteIEPS]" />
+    </Traslados>
+  </Impuestos>
+</Comprobante>

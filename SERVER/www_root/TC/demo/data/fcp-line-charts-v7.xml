@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" showAnchor="1" showArea="0" type_animation="1">
+		<header text="Project Sizes" font="Verdana" color="000000" size="18" />
+		<subheader text="" font="Verdana" color="000000" size="15" />
+		<legend font="Verdana" color="000000" font_size="11" />
+		<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+		<Xheaders rotate="90" color="000000" size="10" title="" title_color="000000" />
+		<Yheaders color="000000" size="10" title="Lines" title_rotate="90" title_color="000000" />
+		<grid showX="0" showY="1" persent_stepY_from_stepX="175" grid_width="550" grid_height="250" grid_color="ffffff" grid_alpha="40" grid_thickness="2" bg_color="C7CABE" bg_alpha="100" alternate_bg_color="C7CABE" border_color="000000" border_thickness="1" />
+	</general_settings>
+	<abscissa_data>
+		<x value="27/05/2004" />
+		<x value="27/07/2004" />
+		<x value="27/08/2004" />
+		<x value="27/11/2004" />
+		<x value="27/01/2005" />
+		<x value="27/03/2005" />
+		<x value="27/05/2005" />
+		<x value="27/07/2005" />
+		<x value="27/09/2005" />
+		<x value="27/11/2005" />
+		<x value="27/01/2006" />
+		<x value="27/03/2006" />
+		<x value="27/05/2006" />
+		<x value="27/07/2006" />
+		<x value="27/08/2006" />
+		<x value="27/11/2006" />
+		<x value="27/01/2007" />
+		<x value="27/03/2007" />
+		<x value="27/05/2007" />
+		<x value="27/07/2007" />
+		<x value="27/08/2007" />
+		<x value="27/09/2007" />
+		<x value="27/11/2007" />
+	</abscissa_data>
+	<ordinate_data seriesName="TnFOX" color="0080C0" alpha="50" size="3.5">
+		<y value="500" />
+		<y value="500" />
+		<y value="600" />
+		<y value="" />
+		<y value="600" />
+		<y value="500" />
+		<y value="350" />
+		<y value="" />
+		<y value="192" />
+		<y value="262" />
+		<y value="319" />
+		<y value="489" />
+		<y value="633" />
+		<y value="" />
+		<y value="1215" />
+		<y value="1358" />
+		<y value="1482" />
+		<y value="1666" />
+		<y value="1811" />
+		<y value="2051" />
+		<y value="2138" />
+		<y value="2209" />
+		<y value="2247" />
+	</ordinate_data>
+	<ordinate_data seriesName="TKernel" color="FF0000" alpha="50" size="3.5">
+		<y value="" />
+		<y value="40" />
+		<y value="62" />
+		<y value="" />
+		<y value="130" />
+		<y value="139" />
+		<y value="158" />
+		<y value="" />
+		<y value="297" />
+		<y value="379" />
+		<y value="503" />
+		<y value="687" />
+		<y value="746" />
+		<y value="" />
+		<y value="973" />
+		<y value="1125" />
+		<y value="1320" />
+		<y value="1518" />
+		<y value="1797" />
+		<y value="1893" />
+		<y value="2010" />
+		<y value="2057" />
+		<y value="2166" />
+	</ordinate_data>
+	<ordinate_data seriesName="Common" color="FF8040" alpha="50" size="3.5">
+		<y value=" " />
+		<y value="2500" />
+		<y value="2000" />
+		<y value="" />
+		<y value="1000" />
+		<y value="1282" />
+		<y value="1365" />
+		<y value="1433" />
+		<y value="1559" />
+		<y value="-1823" />
+		<y value="1867" />
+		<y value="2198" />
+		<y value="2000" />
+		<y value="" />
+		<y value="2020" />
+		<y value="2264" />
+		<y value="2282" />
+		<y value="365" />
+		<y value="2433" />
+		<y value="2559" />
+		<y value="2823" />
+		<y value="2867" />
+		<y value="" />
+	</ordinate_data>
+
+</graph>

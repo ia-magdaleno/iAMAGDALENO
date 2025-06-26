@@ -1,0 +1,57 @@
+<CiberSAT5 url="[pac_url]" pemcert="[pac_pem]">
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:tim="http://www.buzonfiscal.com/ns/xsd/bf/TimbradoCFD"
+    xmlns:req="http://www.buzonfiscal.com/ns/xsd/bf/RequestTimbraCFDI"
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/3">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <tim:RequestTimbradoCFD>
+        <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+          xsi:schemaLocation="http://www.sat.gob.mx/cfd/3
+                          http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv3.xsd"
+          version="3.0" serie="[serie]" folio="[folio]" fecha="[fecha]" sello=""
+          formaDePago="[formaDePago]" noCertificado="01234567890123456789" certificado=""
+          subTotal="[subTotal]" descuento="[descuento]" TipoCambio="[tipocambio]" Moneda="[moneda]"
+          total="[total]" tipoDeComprobante="[tipoDeComprobante]">
+          <cfdi:Emisor rfc="[emisorRfc]" nombre="[emisorNombre]">
+            <cfdi:DomicilioFiscal calle="[emisorCalle]" noExterior="[emisorNoExterior]"
+              noInterior="[emisorNoInterior]" colonia="[emisorColonia]"
+              localidad="[emisorLocalidad]" referencia="[emisorReferencia]"
+              municipio="[emisorMunicipio]" estado="[emisorEstado]" pais="[emisorPais]"
+              codigoPostal="[emisorCodigoPostal]"/>
+          </cfdi:Emisor>
+          <cfdi:Receptor rfc="[receptorRfc]" nombre="[receptorNombre]">
+            <cfdi:Domicilio calle="[receptorCalle]" noExterior="[receptorNoExt]"
+              noInterior="[receptorNoInterior]" colonia="[receptorColonia]"
+              localidad="[receptorLocalidad]" referencia="[receptorReferencia]"
+              municipio="[receptorMunicipio]" estado="[receptorEstado]" pais="[receptorPais]"
+              codigoPostal="[receptorCodigo]"/>
+          </cfdi:Receptor>
+          <cfdi:Conceptos>
+            <cfdi:Concepto cantidad="[conceptoCantidad]" unidad="[conceptoUnidad]"
+              noIdentificacion="[conceptoNoId]" descripcion="[conceptoDesc]"
+              valorUnitario="[conceptoValUnit]" importe="[conceptoImporte]"/>
+          </cfdi:Conceptos>
+          <cfdi:Impuestos totalImpuestosRetenidos="[totalImpuestosRetenidos]"
+            totalImpuestosTrasladados="[totalImpuestosTrasladados]">
+            <cfdi:Traslados>
+              <cfdi:Traslado impuesto="IVA" tasa="[trasladoIVAtasa]" importe="[trasladoImporteIVA]"/>
+              <cfdi:Traslado impuesto="IEPS" tasa="[trasladoTasaIEPS]"
+                importe="[trasladoImporteIEPS]"/>
+            </cfdi:Traslados>
+          </cfdi:Impuestos>
+          <cfdi:Complemento>
+            <tfd:TimbreFiscalDigital 
+              xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+              xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigital.xsd"
+              version="1.0" UUID="00000000-0000-0000-0000-000000000000"
+              FechaTimbrado="2011-01-01T00:00:00" selloCFD=""
+              noCertificadoSAT="12345678901234567890" selloSAT=""/>
+          </cfdi:Complemento>
+        </cfdi:Comprobante>
+        <req:InfoBasica RfcEmisor="[emisorRfc]" RfcReceptor="[receptorRfc]"/>
+      </tim:RequestTimbradoCFD>
+    </soapenv:Body>
+  </soapenv:Envelope>
+</CiberSAT5>

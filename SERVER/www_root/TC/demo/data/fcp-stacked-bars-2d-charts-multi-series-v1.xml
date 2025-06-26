@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" type_graph="v" />
+	<header text="Rechargeable Battery Statistics" font="Verdana" color="000000" size="18" />
+	<subheader text="This graph is the property of Named Corporation" font="Verdana" color="000000" size="11" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="12" title="" title_color="000000" />
+	<Yheaders color="000000" size="12" title="Millions of Unit Batteries" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="FFCF0F" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="FFF9E1" border_color="000000" border_thickness="1" />
+	<bars view_value="1" width="35" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40" />
+	<data>
+		<categorie name="N.America">
+			<series>
+				<subcategorie name="Nickel Cadmium" value="37.9" color="047BB0" />
+				<subcategorie name="Nickel Metal Hydride" value="25" color="D1054C" />
+				<subcategorie name="Lithium Ion" value="5" color="FDC12E" />
+			</series>
+			<series>
+				<subcategorie name="Import" value="23" color="CFCFCF" />
+				<subcategorie name="Export" value="47" color="000000" />
+			</series>
+		</categorie>
+		<categorie name="Europe">
+			<series>
+				<subcategorie name="Nickel Cadmium" value="25.2" color="047BB0" />
+				<subcategorie name="Nickel Metal Hydride" value="20.7" color="D1054C" />
+				<subcategorie name="Lithium Ion" value="9" color="FDC12E" />
+			</series>
+			<series>
+				<subcategorie name="Import" value="16" color="CFCFCF" />
+				<subcategorie name="Export" value="25.5" color="000000" />
+			</series>
+		</categorie>
+		<categorie name="Asia">
+			<series>
+				<subcategorie name="Nickel Cadmium" value="24.6" color="047BB0" />
+				<subcategorie name="Nickel Metal Hydride" value="29" color="D1054C" />
+				<subcategorie name="Lithium Ion" value="12.4" color="FDC12E" />
+			</series>
+			<series>
+				<subcategorie name="Import" value="25.3" color="CFCFCF" />
+				<subcategorie name="Export" value="30" color="000000" />
+			</series>
+		</categorie>
+	</data>
+</graph>

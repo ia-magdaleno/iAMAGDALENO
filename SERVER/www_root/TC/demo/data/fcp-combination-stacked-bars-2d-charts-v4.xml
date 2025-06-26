@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph>
+	<general_settings bg_color="ffffff" common_calibrationYaxis="1" showAnchor="1" type_animation="1" />
+	<header text="Market" font="Verdana" color="000000" size="17" />
+	<subheader text="Toronto Market - 1998" font="Verdana" color="000000" size="12" />
+	<legend font="Verdana" color="000000" font_size="11" />
+	<legend_popup font="Verdana" bgcolor="FFFFE3" font_size="10" />
+	<Xheaders rotate="0" color="000000" size="10" title="Field" title_color="000000" />
+	<Yheaders color="000000" size="10" title_bar="Percent, %" title_line="" title_rotate="90" title_color="000000" />
+	<grid grid_width="500" grid_height="250" grid_color="000000" grid_alpha="30" grid_thickness="1" bg_color="ffffff" bg_alpha="70" alternate_bg_color="f6f6ff" border_color="000000" border_thickness="2" />
+
+	<data>
+		<abscissa_data>
+			<data value="Radio" />
+			<data value="TV" />
+			<data value="Newspaper" />
+		</abscissa_data>
+		<bars view_value="1" width="40" space="1.5" alpha="100" view_double_bar="1" color_double_bar="666666" pieces_grow_bar="40">
+			<categorie name="Radio">
+				<series>
+					<subcategorie name="Local" value="22" color="9e98ff" />
+					<subcatee name="Other Canadian" value="6" color="a02961" />
+				</series>
+				<series>
+					<subcategorie name="Local" value="33" color="9e98ff" />
+					<subcatee name="Other Canadian" value="18" color="a02961" />
+					<subcatee name="Foreign" value="10" color="feffd5" />
+				</series>
+			</categorie>
+			<categorie name="TV">
+				<series>
+					<subcategorie name="Local" value="6" color="9e98ff" />
+					<subcatee name="Other Canadian" value="9" color="a02961" />
+				</series>
+				<series>
+					<subcategorie name="Local" value="7" color="9e98ff" />
+					<subcatee name="Other Canadian" value="19" color="a02961" />
+					<subcatee name="Foreign" value="16" color="feffd5" />
+				</series>
+			</categorie>
+			<categorie name="Newspaper">
+				<series>
+					<subcategorie name="Local" value="-7" color="9e98ff" />
+				</series>
+				<series>
+					<subcategorie name="Local" value="-7" color="9e98ff" />
+				</series>
+			</categorie>
+			
+		</bars>
+		<lines>
+			<ordinate_data seriesName="Trend" color="8a84fd" alpha="55" size="4">
+				<y value="59" />
+				<y value="22" />
+				<y value="-7" />
+			</ordinate_data>
+		</lines>
+	</data>
+</graph>

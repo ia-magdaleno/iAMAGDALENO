@@ -1,0 +1,26 @@
+<script type="text/javascript" src="calendarDateInput.js">
+
+/***********************************************
+* Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
+* Script featured on and available at http://www.dynamicdrive.com
+* Keep this notice intact for use.
+***********************************************/
+
+</script>
+
+
+<P ALIGN='center'><H2>
+... Autorizacion y Visto Bueno de Ordenes de Compra
+</P></H2>
+
+<HR>
+
+    <form name='login' method='post' action='AutorizaOrden'>
+
+	Fecha Inicial : 
+	<script>DateInput('fecha_ini', true, 'DD-MM-YYYY')</script>
+	Fecha Final :
+	<script>DateInput('fecha_fin', true, 'DD-MM-YYYY')</script>
+<br>
+      <tr><td colspan=2 class=footer><input type=submit value=  'Consultar' width=250px style='width:80px; font:bold 12px verdana;'></td></tr>
+  </form>

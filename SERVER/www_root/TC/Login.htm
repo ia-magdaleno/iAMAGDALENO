@@ -1,0 +1,53 @@
+<html>
+<head><title>TimeClock Login</title>
+  <style>
+   td {font:normal 12px verdana; color:yellow; text-align:center;}
+   td.head   {font: bold 14px verdana; color:yellow; text-align:center; align:center; }
+   td.prompt {font: bold 12px verdana; color:yellow; text-align:right; }
+   td.field  {font: normal 14px verdana; color:white; text-align:left; text-transform:uppercase; padding:0px; background-color:#003366;}
+   td.footer {text-align:right; padding:0px; background-color:#003366; width:254px;}
+  </style>
+  <script language="javascript">
+    if(parent.frames.length > 0){ parent.location.href=location.href; }
+  </script>
+
+  </head>
+  <body bgcolor=black style=margin:0px;>
+
+  <table width=100% height=100%>
+    <tr><td align=center>
+
+    <table width=580 height=360 align=center style='background-color:#003366;'>
+      <tr><td valign=top><br><br>
+      <table align=center>
+	<tr><td colspan=2 class=head>
+	  Servidor Http MrTienda<br>
+	  Acceso Maestro<br>
+	  </td></tr>
+	<tr><td align=center>
+
+	<table width=500 height=200>
+	  <tr><td align=center>
+	  <table cellspacing=1 cellpadding=0 align=center>
+	    <form name='login' method='post' action='Login'>
+	      <tr><td class=prompt>Usuario:&nbsp;</td><td class=field><input type=text name='UID' maxlength=50 size=16></td></tr>
+	      <tr><td class=prompt>Password:&nbsp;</td><td class=field><input type=password name='PWD' maxlength=150 size=16></td></tr>
+	      <tr><td colspan=2><hr></td></tr>
+	      <tr><td colspan=2 class=footer><input type=submit value='Ingresar' width=100px style='width:80px; font:bold 12px verdana;'></td></tr>
+	    </form>
+	  </table>
+
+	  </td></tr>
+	</table>
+
+      </table>
+      </td></tr>
+
+    </table>
+    </td></tr>
+  </table>
+
+  <script language='javascript'>document.login.UID.focus();</script>
+
+  </body>
+</html>
